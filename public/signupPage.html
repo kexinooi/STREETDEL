@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign Up - StreetDeli</title>
+    <style>
+      body {
+          margin: 0;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+      }
+
+      .container {
+  text-align: center;
+  max-width: 400px;
+  margin-top: 50px;
+  padding: 0 20px;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.subtitle {
+  margin-bottom: 20px;
+}
+
+.input-tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+}
+
+.input-tabs span {
+  cursor: pointer;
+  padding: 10px;
+}
+
+.input-tabs .active {
+  border-bottom: 2px solid black;
+}
+
+input[type="tel"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  box-sizing: border-box;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.sign-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: green;
+  color: white;
+  font-size: 16px;
+  border: none;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.sign-btn:hover {
+  background-color: darkgreen;
+}
+
+      .error {
+        color: red;
+        font-size: 12px;
+      }
+
+      #result-message {
+        margin-top: 15px;
+        color: green;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="logo">StreetDeli.</h1>
+      <p class="subtitle">Enter your email to sign up</p>
+
+      <form id="signup-form">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit" class="sign-btn">Sign Up</button>
+      </form>
+      <p id="result-message"></p>
+    </div>
+    </div>
+
+    <script>
+      const signupForm = document.getElementById("signup-form");
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const resultMessage = document.getElementById("result-message");
+
+      // Form submission
+      signupForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = emailInput.value.trim();
+  const password = passwordInput.value.trim();
+
+  // Validation
+  if (!email || !password) {
+    resultMessage.style.color = "red";
+    resultMessage.textContent = "Provide both email and password.";
+    return;
+  }
+
+ try {
+  const response = await fetch("/api/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }), // removed phone
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    resultMessage.style.color = "red";
+    resultMessage.textContent = "Error: " + data.message;
+    return;
+  }
+
+  // Success: show message and redirect
+  resultMessage.style.color = "green";
+  resultMessage.textContent = data.message;
+
+  // Redirect to login page after 1 second
+  setTimeout(() => {
+    window.location.href = "loginPage.html";
+  }, 1000);
+
+} catch (err) {
+  resultMessage.style.color = "red";
+  resultMessage.textContent = "Signup failed: " + err.message;
+}
+
+});
+
+    </script>
+  </body>
+</html>

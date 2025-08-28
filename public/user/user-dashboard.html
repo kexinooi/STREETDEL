@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreetDeli Explorer - User Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="user-styles.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Image">
+                <div class="user-info">
+                    <h3>Ahmad Firdaus</h3>
+                    <p>Food Explorer</p>
+                </div>
+            </div>
+
+            <ul class="menu">
+                <li class="menu-item active" data-page="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </li>
+                <li class="menu-item" data-page="order-history">
+                    <i class="fas fa-history"></i>
+                    <span>Order History</span>
+                </li>
+                <li class="menu-item" data-page="favorites">
+                    <i class="fas fa-heart"></i>
+                    <span>Favorites</span>
+                </li>
+                <li class="menu-item" data-page="locations">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>My Locations</span>
+                </li>
+                <li class="menu-item" data-page="rewards">
+                    <i class="fas fa-gift"></i>
+                    <span>Rewards</span>
+                </li>
+                <li class="menu-item" data-page="reviews">
+                    <i class="fas fa-star"></i>
+                    <span>My Reviews</span>
+                </li>
+                <li class="menu-item" data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </li>
+                <li class="menu-item" data-page="help">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help & Support</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Food Explorer Dashboard</h1>
+                <div class="header-actions">
+                    <div class="notification-icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                        <div class="notification-panel">
+                            <div class="notification-header">
+                                <h3>Notifications</h3>
+                                <span class="mark-read">Mark all as read</span>
+                            </div>
+                            <div class="notification-list">
+                                <div class="notification-item">
+                                    <p>Your order from Satay Street is on the way!</p>
+                                    <span class="activity-time">10 minutes ago</span>
+                                </div>
+                                <div class="notification-item">
+                                    <p>You earned 25 reward points for your last order</p>
+                                    <span class="activity-time">2 hours ago</span>
+                                </div>
+                                <div class="notification-item">
+                                    <p>Special discount at Nasi Lemak Corner - 15% off today!</p>
+                                    <span class="activity-time">1 day ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="homepage.html" class="home-icon">
+                        <i class="fas fa-home"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page-content active">
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Recent Orders</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">8</div>
+                        <p class="card-text">Last 30 days</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Favorites</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">12</div>
+                        <p class="card-text">Saved vendors & dishes</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Reward Points</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">345</div>
+                        <p class="card-text">Redeem for discounts</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">My Reviews</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">7</div>
+                        <p class="card-text">Restaurants rated</p>
+                    </div>
+                </div>
+
+                <div class="listings-section">
+                    <h2 class="section-title">
+                        Nearby Street Food Vendors
+                    </h2>
+
+                    <div class="vendor-grid">
+                        <div class="vendor-card">
+                            <div class="vendor-img">
+                                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9H5uoQK4mjjJoyw8fzixC5chnihjBiDGhWQ4PsezTx17s8_peybWAHQWI8CuP7oUC4aVtdgRFZiX_vHKy5DLZUbtiCYGTLlcd1BSkZOHEEWRUpg-BGbub6QuXagx2p9XrPRmaUCKYmMQ/s1600/20180413_191731.jpg"
+                                    alt="Restaurant Satay Station">
+                            </div>
+                            <div class="vendor-details">
+                                <h3 class="vendor-title">Restaurant Satay Station</h3>
+                                <p class="vendor-category">Malaysian · Street Food · BBQ</p>
+                                <div class="vendor-meta">
+                                    <span class="vendor-rating">
+                                        <i class="fas fa-star"></i> 4.8 (128 reviews)
+                                    </span>
+                                    <span class="vendor-distance">1.2 km</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vendor-card">
+                            <div class="vendor-img">
+                                <img src="https://www.nasilemakwau.com/images/2024/09/09/whatsapp-image-2024-09-06-at-6.34.11-pm.jpeg"
+                                    alt="Nasi Lemak Wau">
+                            </div>
+                            <div class="vendor-details">
+                                <h3 class="vendor-title">Nasi Lemak Wau</h3>
+                                <p class="vendor-category">Malaysian · Breakfast · Rice</p>
+                                <div class="vendor-meta">
+                                    <span class="vendor-rating">
+                                        <i class="fas fa-star"></i> 4.7 (95 reviews)
+                                    </span>
+                                    <span class="vendor-distance">0.8 km</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vendor-card">
+                            <div class="vendor-img">
+                                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwCPSWNA8nuxsIlmntbGomkzgUuviFS98iwzSCwi6TuPJMFlc4UlYF27TLKO2KJ6-W74yYoIhdDk5HMv5SP-_wHi-Raapw-hseycsBKGzSf8UIO2fjZHEgWk654UxGo-PDjOSSsvOmFw/s1600/Mr.+Roti+Canai-2.jpg"
+                                    alt="Mr. Roti Canai">
+                            </div>
+                            <div class="vendor-details">
+                                <h3 class="vendor-title">Mr. Roti Canai</h3>
+                                <p class="vendor-category">Indian · Street Food · Vegetarian</p>
+                                <div class="vendor-meta">
+                                    <span class="vendor-rating">
+                                        <i class="fas fa-star"></i> 4.6 (87 reviews)
+                                    </span>
+                                    <span class="vendor-distance">1.5 km</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vendor-card">
+                            <div class="vendor-img">
+                                <img src="https://www.littledayout.com/wp-content/uploads/the-dim-sum-place-11.jpg"
+                                    alt="The Dim Sum Place">
+                            </div>
+                            <div class="vendor-details">
+                                <h3 class="vendor-title">The Dim Sum Place</h3>
+                                <p class="vendor-category">Chinese · Breakfast · Traditional</p>
+                                <div class="vendor-meta">
+                                    <span class="vendor-rating">
+                                        <i class="fas fa-star"></i> 4.9 (142 reviews)
+                                    </span>
+                                    <span class="vendor-distance">0.9 km</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="listings-section">
+                    <h2 class="section-title">
+                        Recommended For You
+                        <a href="moreaccess.html" class="btn" id="seeMoreRecommendations">
+                            <button class="btn btn-outline" id="seeMoreRecommendations">See More</button>
+                        </a>
+                    </h2>
+
+                    <div class="food-grid">
+                        <div class="food-item">
+                            <div class="food-img">
+                                <img src="https://inquiringchef.com/wp-content/uploads/2019/02/Chicken-Satay-4.jpg"
+                                    alt="Chicken Satay">
+                            </div>
+                            <div class="food-details">
+                                <h3 class="food-title">Chicken Satay</h3>
+                                <p class="food-desc">Grilled chicken skewers with peanut sauce, served with cucumber and
+                                    onion.</p>
+                                <div class="food-meta">
+                                    <span class="food-price">RM12.00</span>
+                                    <span class="food-rating">
+                                        <i class="fas fa-star"></i> 4.8
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food-item">
+                            <div class="food-img">
+                                <img src="https://d3h1lg3ksw6i6b.cloudfront.net/media/image/2024/09/02/be1caaf996bc4d019d43f0beac1d22ce_Nasi_Lemak_Header.jpg"
+                                    alt="Nasi Lemak">
+                            </div>
+                            <div class="food-details">
+                                <h3 class="food-title">Nasi Lemak</h3>
+                                <p class="food-desc">Coconut rice with sambal, anchovies, peanuts, and boiled egg.</p>
+                                <div class="food-meta">
+                                    <span class="food-price">RM8.50</span>
+                                    <span class="food-rating">
+                                        <i class="fas fa-star"></i> 4.7
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food-item">
+                            <div class="food-img">
+                                <img src="https://www.elmundoeats.com/wp-content/uploads/2017/11/Roti-Canai-3-500x500.jpg"
+                                    alt="Roti Canai">
+                            </div>
+                            <div class="food-details">
+                                <h3 class="food-title">Roti Canai</h3>
+                                <p class="food-desc">Flaky flatbread served with dhal curry or other dipping sauces.</p>
+                                <div class="food-meta">
+                                    <span class="food-price">RM4.00</span>
+                                    <span class="food-rating">
+                                        <i class="fas fa-star"></i> 4.6
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food-item">
+                            <div class="food-img">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe5LQYoAWLePSIZj89vz4WdQT5Ff04uHDYcA&s"
+                                    alt="Cendol">
+                            </div>
+                            <div class="food-details">
+                                <h3 class="food-title">Cendol</h3>
+                                <p class="food-desc">Iced sweet dessert with green rice flour jelly, coconut milk and
+                                    palm
+                                    sugar.</p>
+                                <div class="food-meta">
+                                    <span class="food-price">RM5.50</span>
+                                    <span class="food-rating">
+                                        <i class="fas fa-star"></i> 4.9
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-section">
+                    <h2 class="section-title">Recent Activity</h2>
+
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>You ordered <strong>Chicken Satay</strong> from <strong>Satay Street</strong></p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </li>
+
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>You rated <strong>Nasi Lemak Corner</strong> 5 stars</p>
+                                <span class="activity-time">Yesterday</span>
+                            </div>
+                        </li>
+
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>You added <strong>Roti Canai Express</strong> to your favorites</p>
+                                <span class="activity-time">2 days ago</span>
+                            </div>
+                        </li>
+
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>You earned 25 reward points for your last order</p>
+                                <span class="activity-time">3 days ago</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Order History Page -->
+            <div id="order-history" class="page-content">
+                <h2 class="section-title">Order History</h2>
+
+                <div class="order-card">
+                    <div class="order-header">
+                        <h3>Selera Street</h3>
+                        <span class="order-status status-delivered">Delivered</span>
+                    </div>
+                    <div class="order-details">
+                        <div class="order-img">
+                            <img src="https://inquiringchef.com/wp-content/uploads/2019/02/Chicken-Satay-4.jpg"
+                                alt="Chicken Satay">
+                        </div>
+                        <div class="order-info">
+                            <p><strong>Chicken Satay (x2)</strong></p>
+                            <p>Total: RM24.00</p>
+                            <p class="activity-time">Ordered on: June 12, 2025 at 6:30 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-card">
+                    <div class="order-header">
+                        <h3>Nasi Lemak Wau</h3>
+                        <span class="order-status status-delivered">Delivered</span>
+                    </div>
+                    <div class="order-details">
+                        <div class="order-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHAz4kk6kABjU66lckRLmimvoCpmyFS2H3zg&s"
+                                alt="Nasi Lemak Special">
+                        </div>
+                        <div class="order-info">
+                            <p><strong>Nasi Lemak Special (x1)</strong></p>
+                            <p>Total: RM12.50</p>
+                            <p class="activity-time">Ordered on: June 10, 2025 at 8:15 AM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-card">
+                    <div class="order-header">
+                        <h3>Mr. Roti Canai</h3>
+                        <span class="order-status status-cancelled">Cancelled</span>
+                    </div>
+                    <div class="order-details">
+                        <div class="order-img">
+                            <img src="https://www.elmundoeats.com/wp-content/uploads/2017/11/Roti-Canai-3-500x500.jpg"
+                                alt="Roti Canai">
+                        </div>
+                        <div class="order-info">
+                            <p><strong>Roti Canai (x3), Teh Tarik (x2)</strong></p>
+                            <p>Total: RM18.00</p>
+                            <p class="activity-time">Ordered on: June 8, 2025 at 7:45 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorites Page -->
+            <div id="favorites" class="page-content">
+                <h2 class="section-title">Your Favorites</h2>
+
+                <div class="favorites-grid">
+                    <div class="food-item">
+                        <div class="food-img">
+                            <img src="https://inquiringchef.com/wp-content/uploads/2019/02/Chicken-Satay-4.jpg"
+                                alt="Chicken Satay">
+                        </div>
+                        <div class="food-details">
+                            <h3 class="food-title">Chicken Satay</h3>
+                            <p class="food-desc">Grilled chicken skewers with peanut sauce, served with cucumber and
+                                onion.</p>
+                            <div class="food-meta">
+                                <span class="food-price">RM12.00</span>
+                                <span class="food-rating">
+                                    <i class="fas fa-star"></i> 4.8
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vendor-card">
+                        <div class="vendor-img">
+                            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/53/48/49/satay-asian-restaurant.jpg?w=900&h=-1&s=1"
+                                alt="Selera Street">
+                        </div>
+                        <div class="vendor-details">
+                            <h3 class="vendor-title">Selera Street</h3>
+                            <p class="vendor-category">Malaysian · Street Food · BBQ</p>
+                            <div class="vendor-meta">
+                                <span class="vendor-rating">
+                                    <i class="fas fa-star"></i> 4.8 (128 reviews)
+                                </span>
+                                <span class="vendor-distance">1.2 km</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="food-item">
+                        <div class="food-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe5LQYoAWLePSIZj89vz4WdQT5Ff04uHDYcA&s"
+                                alt="Cendol">
+                        </div>
+                        <div class="food-details">
+                            <h3 class="food-title">Cendol</h3>
+                            <p class="food-desc">Iced sweet dessert with green rice flour jelly, coconut milk and palm
+                                sugar.</p>
+                            <div class="food-meta">
+                                <span class="food-price">RM5.50</span>
+                                <span class="food-rating">
+                                    <i class="fas fa-star"></i> 4.9
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Locations Page -->
+            <div id="locations" class="page-content">
+                <h2 class="section-title">Your Saved Locations</h2>
+
+                <div class="listings-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Home</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                        </div>
+                        <div class="map-container">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254965.4750289546!2d101.60074204999999!3d3.1389844500000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc49c701efeae7%3A0xf4d98e5b2f1c287d!2sKuala%20Lumpur%2C%20Federal%20Territory%20of%20Kuala%20Lumpur%2C%20Malaysia!5e0!3m2!1sen!2sus!4v1684567890123!5m2!1sen!2sus"
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <p class="card-text">123 Main Street, Kuala Lumpur</p>
+                        <div>
+                            <button class="btn btn-outline edit-address" data-address="Home">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="btn btn-danger delete-address" data-address="Home">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Work</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                        </div>
+                        <div class="map-container">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254965.4750289546!2d101.60074204999999!3d3.1389844500000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc49c701efeae7%3A0xf4d98e5b2f1c287d!2sKuala%20Lumpur%2C%20Federal%20Territory%20of%20Kuala%20Lumpur%2C%20Malaysia!5e0!3m2!1sen!2sus!4v1684567890123!5m2!1sen!2sus"
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <p class="card-text">456 Business Avenue, Kuala Lumpur</p>
+                        <div>
+                            <button class="btn btn-outline edit-address" data-address="Work">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="btn btn-danger delete-address" data-address="Work">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Other</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                        </div>
+                        <p class="card-text">No address saved</p>
+                        <div>
+                            <button class="btn btn-outline edit-address" data-address="Other">
+                                <i class="fas fa-edit"></i> Add New Address
+                            </button>
+                            <button class="btn btn-danger delete-address" data-address="Other">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address Edit Modal -->
+                <div id="addressModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2 id="modalTitle">Edit Address</h2>
+                        <div class="form-group">
+                            <label class="form-label">Address Name</label>
+                            <input type="text" class="form-input" id="addressName" placeholder="Home, Work, etc.">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Full Address</label>
+                            <textarea class="form-input" id="fullAddress" rows="3"
+                                placeholder="Enter your full address"></textarea>
+                        </div>
+                        <button class="btn btn-primary" id="saveAddress">Save Address</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rewards Page -->
+            <div id="rewards" class="page-content">
+                <h2 class="section-title">Your Rewards</h2>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Reward Points</h3>
+                        <div class="card-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                    </div>
+                    <div class="card-value"><span id="rewardPoints">345</span> points</div>
+                    <p class="card-text">Earn <span id="pointsNeeded">155</span> more points to get a free meal (500
+                        points)</p>
+                    <div style="background: #f0f0f0; height: 20px; border-radius: 10px; margin: 15px 0;">
+                        <div id="pointsProgress"
+                            style="background: var(--primary); height: 100%; width: 69%; border-radius: 10px;"></div>
+                    </div>
+                </div>
+
+                <div class="listings-section">
+                    <h3 class="section-title">Available Rewards</h3>
+
+                    <div class="food-grid">
+                        <div class="food-item" data-reward-id="1" data-points-cost="100">
+                            <div class="food-img">
+                                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1981&q=80"
+                                    alt="Free Appetizer">
+                            </div>
+                            <div class="food-details">
+                                <h3 class="food-title">Free Appetizer</h3>
+                                <p class="food-desc">Get a free appetizer with any main course order</p>
+                                <div class="food-meta">
+                                    <span class="food-price">100 points</span>
+                                    <button class="btn btn-primary redeem-btn">Redeem</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food-item" data-reward-id="2" data-points-cost="200">
+                            <div class="food-img">
+                                <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                                    alt="15% Discount">
+                            </div>
+                            <div class="food-details">
+                                <h3 class="food-title">15% Discount</h3>
+                                <p class="food-desc">Get 15% off your entire order</p>
+                                <div class="food-meta">
+                                    <span class="food-price">200 points</span>
+                                    <button class="btn btn-primary redeem-btn">Redeem</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food-item" data-reward-id="3" data-points-cost="500">
+                            <div class="food-img">
+                                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1965&q=80"
+                                    alt="Free Meal">
+                            </div>
+                            <div class="food-details">
+                                <h3 class="food-title">Free Meal</h3>
+                                <p class="food-desc">Get a free meal of your choice</p>
+                                <div class="food-meta">
+                                    <span class="food-price">500 points</span>
+                                    <button class="btn btn-outline redeem-btn">Not Enough Points</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Page -->
+            <div id="reviews" class="page-content">
+                <h2 class="section-title">Your Reviews</h2>
+
+                <div class="activity-section">
+                    <div class="activity-item" data-review-id="1">
+                        <div class="activity-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="star-rating" data-rating="5">
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                            </div>
+                            <p>You rated <strong>Selera Street</strong></p>
+                            <p>"The chicken satay here is amazing! The peanut sauce is perfect and the meat is tender."
+                            </p>
+                            <span class="activity-time">Posted on: June 12, 2025</span>
+                        </div>
+                    </div>
+
+                    <div class="activity-item" data-review-id="2">
+                        <div class="activity-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="star-rating" data-rating="4">
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>You rated <strong>Nasi Lemak Wau</strong></p>
+                            <p>"Good nasi lemak, but the sambal could be spicier. Portion size is generous."</p>
+                            <span class="activity-time">Posted on: June 10, 2025</span>
+                        </div>
+                    </div>
+
+                    <div class="activity-item" data-review-id="3">
+                        <div class="activity-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="star-rating" data-rating="5">
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                            </div>
+                            <p>You rated <strong>Cendol Delight</strong></p>
+                            <p>"Best cendol in town! Perfect balance of sweetness and the ice is shaved finely."</p>
+                            <span class="activity-time">Posted on: June 5, 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="settings" class="page-content">
+                <h2 class="section-title">Settings</h2>
+
+                <div class="settings-section">
+                    <h3>Profile Information</h3>
+
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" id="profileName" value="Ahmad Firdaus">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" id="profileEmail" value="ahmad.firdaus@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-input" id="profilePhone" value="+60 12 345 6789">
+                    </div>
+
+                    <button class="btn btn-primary" id="updateProfileBtn">Update Profile</button>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Change Password</h3>
+
+                    <div class="form-group">
+                        <label class="form-label">Current Password</label>
+                        <input type="password" class="form-input" id="currentPassword"
+                            placeholder="Enter current password">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">New Password</label>
+                        <input type="password" class="form-input" id="newPassword" placeholder="Enter new password">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-input" id="confirmPassword"
+                            placeholder="Confirm new password">
+                    </div>
+
+                    <button class="btn btn-primary" id="changePasswordBtn">Change Password</button>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Payment Methods</h3>
+
+                    <div class="payment-methods">
+                        <div class="payment-method selected" data-method="card">
+                            <div class="payment-method-header">
+                                <i class="fas fa-credit-card payment-method-icon"></i>
+                                <h4>Credit/Debit Card</h4>
+                            </div>
+                            <p>**** **** **** 1234</p>
+                            <p>Exp: 12/25</p>
+                        </div>
+
+                        <div class="payment-method" data-method="digital">
+                            <div class="payment-method-header">
+                                <i class="fas fa-mobile-alt payment-method-icon"></i>
+                                <h4>Digital Wallet</h4>
+                            </div>
+                            <p>Touch 'n Go eWallet</p>
+                            <p>+60 12 345 6789</p>
+                        </div>
+
+                        <div class="payment-method" data-method="bank">
+                            <div class="payment-method-header">
+                                <i class="fas fa-university payment-method-icon"></i>
+                                <h4>Bank Transfer</h4>
+                            </div>
+                            <p>Maybank</p>
+                            <p>******7890</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Notification Preferences</h3>
+
+                    <div class="settings-item">
+                        <div>
+                            <h4>Email Notifications</h4>
+                            <p>Receive emails about orders and promotions</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="emailNotifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-item">
+                        <div>
+                            <h4>Push Notifications</h4>
+                            <p>Receive push notifications on your device</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="pushNotifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-item">
+                        <div>
+                            <h4>SMS Updates</h4>
+                            <p>Receive order updates via SMS</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="smsNotifications">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Privacy & Security</h3>
+
+                    <div class="settings-item">
+                        <div>
+                            <h4>Location Services</h4>
+                            <p>Allow us to access your location for better recommendations</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="locationServices" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-item">
+                        <div>
+                            <h4>Personalized Ads</h4>
+                            <p>See ads tailored to your preferences</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="personalizedAds">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-item">
+                        <div>
+                            <h4>Two-Factor Authentication</h4>
+                            <p>Add an extra layer of security to your account</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="twoFactorAuth">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Replace the current Help & Support section with this code -->
+            <div id="help" class="page-content">
+                <h2 class="section-title">
+                    Help & Support
+                    <a href="UserContact.html" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> Contact Support
+                    </a>
+                </h2>
+
+                <div class="card">
+                    <h3>Frequently Asked Questions</h3>
+                    <div class="form-group">
+                        <div class="form-label">How do I place an order?</div>
+                        <p>Browse vendors, select items, and proceed to checkout.</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label">How can I track my order?</div>
+                        <p>Go to Order History to see the status of your current orders.</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label">What payment methods are accepted?</div>
+                        <p>We accept credit/debit cards, online banking, and e-wallets.</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label">How do I earn reward points?</div>
+                        <p>You earn points for every order placed through the app.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation functionality
+        const menuItems = document.querySelectorAll('.menu-item');
+        const pageContents = document.querySelectorAll('.page-content');
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', function () {
+                const targetPage = this.getAttribute('data-page');
+
+                // Update active menu item
+                menuItems.forEach(menuItem => menuItem.classList.remove('active'));
+                this.classList.add('active');
+
+                // Show target page
+                pageContents.forEach(page => page.classList.remove('active'));
+                document.getElementById(targetPage).classList.add('active');
+            });
+        });
+
+        // Notification functionality
+        const notificationIcon = document.querySelector('.notification-icon');
+        const notificationPanel = document.querySelector('.notification-panel');
+
+        notificationIcon.addEventListener('click', function (e) {
+            e.stopPropagation();
+            notificationPanel.classList.toggle('active');
+        });
+
+        // Close notification panel when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!notificationIcon.contains(e.target) && !notificationPanel.contains(e.target)) {
+                notificationPanel.classList.remove('active');
+            }
+        });
+
+        // Address modal functionality
+        const addressModal = document.getElementById('addressModal');
+        const closeModal = document.querySelector('.close');
+        const saveAddressBtn = document.getElementById('saveAddress');
+        const editAddressButtons = document.querySelectorAll('.edit-address');
+        const deleteAddressButtons = document.querySelectorAll('.delete-address');
+
+        // Open modal for editing address
+        editAddressButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const addressType = this.getAttribute('data-address');
+                document.getElementById('modalTitle').textContent = `Edit ${addressType} Address`;
+                document.getElementById('addressName').value = addressType;
+
+                // In a real app, you would pre-fill with existing address data
+                addressModal.style.display = 'block';
+            });
+        });
+
+        // Delete address functionality
+        deleteAddressButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const addressType = this.getAttribute('data-address');
+                if (confirm(`Are you sure you want to delete your ${addressType} address?`)) {
+                    alert(`${addressType} address deleted successfully!`);
+                    // In a real app, you would make an API call to delete the address
+                }
+            });
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', function () {
+            addressModal.style.display = 'none';
+        });
+
+        // Save address
+        saveAddressBtn.addEventListener('click', function () {
+            const addressName = document.getElementById('addressName').value;
+            const fullAddress = document.getElementById('fullAddress').value;
+
+            if (!addressName || !fullAddress) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            alert(`Address saved successfully for ${addressName}: ${fullAddress}`);
+            addressModal.style.display = 'none';
+
+            // In a real app, you would make an API call to save the address
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function (event) {
+            if (event.target === addressModal) {
+                addressModal.style.display = 'none';
+            }
+        });
+
+        // Add new address button
+        document.getElementById('addLocationBtn').addEventListener('click', function () {
+            document.getElementById('modalTitle').textContent = 'Add New Address';
+            document.getElementById('addressName').value = '';
+            document.getElementById('fullAddress').value = '';
+            addressModal.style.display = 'block';
+        });
+
+        // Update Profile button
+        document.getElementById('updateProfileBtn').addEventListener('click', function () {
+            const name = document.getElementById('profileName').value;
+            const email = document.getElementById('profileEmail').value;
+            const phone = document.getElementById('profilePhone').value;
+
+            alert(`Profile updated successfully!\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`);
+        });
+
+        // Change Password button
+        document.getElementById('changePasswordBtn').addEventListener('click', function () {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                alert('Please fill in all password fields');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                alert('New passwords do not match');
+                return;
+            }
+
+            alert('Password changed successfully!');
+
+            // Clear the password fields
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        });
+
+        // Payment method selection
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', function () {
+                // Remove selected class from all methods
+                paymentMethods.forEach(m => m.classList.remove('selected'));
+                // Add selected class to clicked method
+                this.classList.add('selected');
+            });
+        });
+
+        // Add Payment Method button
+        document.getElementById('addPaymentMethod').addEventListener('click', function () {
+            alert('Redirecting to add payment method page...');
+            // In a real app, this would open a form to add a new payment method
+        });
+
+        // Redeem buttons for rewards
+        const redeemButtons = document.querySelectorAll('.redeem-btn');
+        redeemButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const foodItem = this.closest('.food-item');
+                const rewardId = foodItem.getAttribute('data-reward-id');
+                const pointsCost = foodItem.getAttribute('data-points-cost');
+
+                alert(`Redeeming reward #${rewardId} for ${pointsCost} points`);
+                // In a real app, this would make an API call to redeem the reward
+            });
+        });
+
+        // Toggle switches functionality
+        const toggleSwitches = document.querySelectorAll('.toggle-switch input');
+        toggleSwitches.forEach(toggle => {
+            toggle.addEventListener('change', function () {
+                const settingId = this.id;
+                const isChecked = this.checked;
+
+                alert(`${settingId} is now ${isChecked ? 'enabled' : 'disabled'}`);
+                // In a real app, this would save the preference to the backend
+            });
+        });
+
+        // See More Recommendations button
+        document.getElementById('seeMoreRecommendations').addEventListener('click', function () {
+            alert('Loading more recommendations...');
+            // In a real app, this would load more food items
+        });
+    </script>
+</body>
+
+</html>

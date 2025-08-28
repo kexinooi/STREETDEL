@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreetDeli - Vendor Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="vendor-styles.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/53/48/49/satay-asian-restaurant.jpg?w=900&h=-1&s=1"
+                    alt="Vendor Image">
+                <div class="user-info">
+                    <h3>Selera Street</h3>
+                    <p>Food Vendor</p>
+                </div>
+                <div class="vendor-status" id="statusToggle">
+                    <span class="status-indicator" id="statusIndicator"></span>
+                    <span id="statusText">Online</span>
+                </div>
+            </div>
+
+            <ul class="menu">
+                <li class="menu-item active" data-target="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </li>
+                <li class="menu-item" data-target="menu">
+                    <i class="fas fa-utensils"></i>
+                    <span>My Menu</span>
+                </li>
+                <li class="menu-item" data-target="analytics">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </li>
+                <li class="menu-item" data-target="location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Location</span>
+                </li>
+                <li class="menu-item" data-target="schedule">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Schedule</span>
+                </li>
+                <li class="menu-item" data-target="reviews">
+                    <i class="fas fa-star"></i>
+                    <span>Reviews</span>
+                </li>
+                <li class="menu-item" data-target="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </li>
+                <li class="menu-item" data-target="help">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help & Support</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1 id="pageTitle">Vendor Dashboard</h1>
+                <div class="header-actions">
+                    <div class="notification-bell" id="notificationBell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <a href="homepage.html" class="home-icon">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search for dishes, orders...">
+                    </div>
+                </div>
+                <div id="searchResults" class="search-results" style="display: none;"></div>
+            </div>
+
+            <!-- Dashboard Content -->
+            <div id="dashboard" class="content-section active">
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Today's Orders</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">42</div>
+                        <p class="card-text">+12% from yesterday</p>
+                        <div class="card-trend trend-up">
+                            <i class="fas fa-arrow-up"></i> 12% increase
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Total Earnings</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">RM1,248</div>
+                        <p class="card-text">This week</p>
+                        <div class="card-trend trend-up">
+                            <i class="fas fa-arrow-up"></i> 8% increase
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Average Rating</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">4.7</div>
+                        <p class="card-text">Based on 128 reviews</p>
+                        <div class="card-trend trend-up">
+                            <i class="fas fa-arrow-up"></i> 0.2 improvement
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Menu Items</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">18</div>
+                        <p class="card-text">3 new this month</p>
+                        <div class="card-trend trend-up">
+                            <i class="fas fa-plus"></i> 3 new items
+                        </div>
+                    </div>
+                </div>
+
+                <div class="listings-section">
+                    <h2 class="section-title">
+                        Popular Menu Items
+                        <button class="btn btn-primary" id="addMenuItemBtn">
+                            <i class="fas fa-plus"></i> Add New Item
+                        </button>
+                    </h2>
+
+                    <div class="food-grid" id="foodGrid">
+                        <!-- Food items will be dynamically populated -->
+                    </div>
+                </div>
+
+                <div class="activity-section">
+                    <h2 class="section-title">Recent Activity</h2>
+
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p><strong>Ahmad</strong> left a 5-star review for Chicken Satay</p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </li>
+
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>New order #2847 for Roti Canai (x3) and Teh Tarik (x2)</p>
+                                <span class="activity-time">4 hours ago</span>
+                            </div>
+                        </li>
+
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>Your location was searched 42 times today</p>
+                                <span class="activity-time">6 hours ago</span>
+                            </div>
+                        </li>
+
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>You added Mee Goreng to your menu</p>
+                                <span class="activity-time">Yesterday</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Menu Content -->
+            <div id="menu" class="content-section">
+                <div class="section-title">
+                    <h2>My Menu Management</h2>
+                    <button class="btn btn-primary" id="addMenuBtn">
+                        <i class="fas fa-plus"></i> Add New Item
+                    </button>
+                </div>
+
+                <div class="tabs">
+                    <div class="tab active" data-tab="menu-items">Menu Items</div>
+                    <div class="tab" data-tab="specials">Daily Specials</div>
+                </div>
+
+                <div class="tab-content active" id="menu-items">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="menuItemsTable">
+                            <!-- Menu items will be dynamically populated -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-content" id="specials">
+                    <div class="card">
+                        <h3>Daily Specials</h3>
+                        <p>Create special offers and promotions to attract more customers.</p>
+                        <div class="form-group">
+                            <label class="form-label">Special Offer Title</label>
+                            <input type="text" class="form-input" placeholder="e.g., Wednesday Special"
+                                value="Weekend Special - 10% Off" id="specialTitle">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-input form-textarea" placeholder="Describe your special offer"
+                                id="specialDescription">Get 10% off on all orders above RM50 every Saturday and Sunday.</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Discount Percentage</label>
+                            <input type="number" class="form-input" value="10" min="0" max="100" id="specialDiscount">
+                        </div>
+                        <button class="btn btn-primary" id="updateSpecialBtn">Update Special Offer</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Content -->
+            <div id="analytics" class="content-section">
+                <div class="section-title">
+                    <h2>Business Analytics</h2>
+                    <div>
+                        <button class="btn btn-outline" id="exportReportBtn">
+                            <i class="fas fa-download"></i> Export Report
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Weekly Revenue</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">RM3,842</div>
+                        <p class="card-text">15% increase from last week</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Top Selling Item</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">Chicken Satay</div>
+                        <p class="card-text">128 orders this week</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Customer Visits</h3>
+                            <div class="card-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">342</div>
+                        <p class="card-text">22% returning customers</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Sales Performance</h3>
+                    <p>View your sales trends, customer behavior, and performance metrics.</p>
+                    <div class="chart-container" id="salesChart">
+                        <!-- Chart bars will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="tabs">
+                    <div class="tab active" data-tab="sales">Sales Data</div>
+                    <div class="tab" data-tab="customer">Customer Insights</div>
+                    <div class="tab" data-tab="popular">Popular Items</div>
+                </div>
+
+                <div class="tab-content active" id="sales">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Orders</th>
+                                <th>Revenue</th>
+                                <th>Avg. Order Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Today</td>
+                                <td>42</td>
+                                <td>RM1,248</td>
+                                <td>RM29.71</td>
+                            </tr>
+                            <tr>
+                                <td>Yesterday</td>
+                                <td>38</td>
+                                <td>RM1,105</td>
+                                <td>RM29.08</td>
+                            </tr>
+                            <tr>
+                                <td>This Week</td>
+                                <td>215</td>
+                                <td>RM6,342</td>
+                                <td>RM29.50</td>
+                            </tr>
+                            <tr>
+                                <td>This Month</td>
+                                <td>842</td>
+                                <td>RM24,856</td>
+                                <td>RM29.52</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-content" id="customer">
+                    <div class="card">
+                        <h3>Customer Insights</h3>
+                        <p>Understand your customer demographics and preferences.</p>
+
+                        <div class="chart-container" id="customerChart">
+                            <!-- Customer chart will be generated by JavaScript -->
+                        </div>
+
+                        <div class="dashboard-cards">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">New Customers</h3>
+                                    <div class="card-icon">
+                                        <i class="fas fa-user-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="card-value">78</div>
+                                <p class="card-text">This month</p>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Returning Customers</h3>
+                                    <div class="card-icon">
+                                        <i class="fas fa-redo"></i>
+                                    </div>
+                                </div>
+                                <div class="card-value">42%</div>
+                                <p class="card-text">Customer retention rate</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="popular">
+                    <div class="card">
+                        <h3>Popular Menu Items</h3>
+                        <p>See which items are trending with your customers.</p>
+
+                        <table class="data-table" id="popularItemsTable">
+                            <thead>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Orders</th>
+                                    <th>Revenue</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Popular items will be dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location Content -->
+            <div id="location" class="content-section">
+                <div class="section-title">
+                    <h2>Location Management</h2>
+                    <button class="btn btn-primary" id="editLocationBtn">
+                        <i class="fas fa-edit"></i> Edit Location
+                    </button>
+                </div>
+
+                <div class="card">
+                    <h3>Your Business Location</h3>
+                    <p>Update your business location and service areas.</p>
+
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254965.4750289546!2d101.60074204999999!3d3.1389844500000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc49c701efeae7%3A0xf4d98e5b2f1c287d!2sKuala%20Lumpur%2C%20Federal%20Territory%20of%20Kuala%20Lumpur%2C%20Malaysia!5e0!3m2!1sen!2sus!4v1684567890123!5m2!1sen!2sus"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Business Address</label>
+                        <input type="text" class="form-input" value="123 Food Street, Kuala Lumpur" id="businessAddress"
+                            disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Service Radius</label>
+                        <select class="form-input" id="serviceRadius" disabled>
+                            <option>5 km</option>
+                            <option selected>10 km</option>
+                            <option>15 km</option>
+                            <option>20 km</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-primary" id="updateLocationBtn" style="display: none;">Update
+                        Location</button>
+                </div>
+
+                <div class="card">
+                    <h3>Location Statistics</h3>
+                    <div class="dashboard-cards">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Searches This Week</h3>
+                                <div class="card-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                            </div>
+                            <div class="card-value">245</div>
+                            <p class="card-text">+18% from last week</p>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Delivery Orders</h3>
+                                <div class="card-icon">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                            </div>
+                            <div class="card-value">128</div>
+                            <p class="card-text">65% of total orders</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schedule Content -->
+            <div id="schedule" class="content-section">
+                <div class="section-title">
+                    <h2>Business Schedule</h2>
+                    <button class="btn btn-primary" id="saveScheduleBtn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+
+                <div class="card">
+                    <h3>Operating Hours</h3>
+                    <p>Set your opening and closing times for each day of the week.</p>
+
+                    <div class="hours-editor" id="hoursEditor">
+                        <!-- Hours will be dynamically populated -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Content -->
+            <div id="reviews" class="content-section">
+                <div class="section-title">
+                    <h2>Customer Reviews</h2>
+                    <div class="filter-section">
+                        <div class="filter-group">
+                            <span>Filter by:</span>
+                            <select class="filter-select" id="ratingFilter">
+                                <option value="all">All Ratings</option>
+                                <option value="5">5 Stars</option>
+                                <option value="4">4 Stars</option>
+                                <option value="3">3 Stars</option>
+                                <option value="2">2 Stars</option>
+                                <option value="1">1 Star</option>
+                            </select>
+                            <select class="filter-select" id="dateFilter">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reviewsContainer">
+                    <!-- Reviews will be dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Settings Content -->
+            <div id="settings" class="content-section">
+                <div class="section-title">
+                    <h2>Account Settings</h2>
+                    <button class="btn btn-primary" id="saveSettingsBtn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+
+                <div class="tabs">
+                    <div class="tab active" data-tab="profile">Profile</div>
+                    <div class="tab" data-tab="notifications">Notifications</div>
+                    <div class="tab" data-tab="security">Security</div>
+                    <div class="tab" data-tab="payment">Payment</div>
+                </div>
+
+                <div class="tab-content active" id="profile">
+                    <div class="card">
+                        <h3>Profile Information</h3>
+                        <p>Update your account information and business details.</p>
+
+                        <div class="form-group">
+                            <label class="form-label">Business Name</label>
+                            <input type="text" class="form-input" value="Selera Street" id="businessName">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Business Description</label>
+                            <textarea class="form-input form-textarea"
+                                id="businessDescription">Authentic Malaysian street food with a modern twist. We serve the best satay in town!</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Contact Email</label>
+                            <input type="email" class="form-input" value="contact@selerastreet.com" id="contactEmail">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" value="+60 12 345 6789" id="phoneNumber">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="notifications">
+                    <div class="card">
+                        <h3>Notification Preferences</h3>
+                        <p>Manage how you receive notifications.</p>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <input type="checkbox" checked id="orderAlerts"> New Order Alerts
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <input type="checkbox" checked id="reviewNotifications"> Review Notifications
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <input type="checkbox" checked id="promotionUpdates"> Promotion Updates
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <input type="checkbox" id="newsletter"> Newsletter
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="security">
+                    <div class="card">
+                        <h3>Security Settings</h3>
+                        <p>Manage your account security and password.</p>
+
+                        <div class="form-group">
+                            <label class="form-label">Current Password</label>
+                            <input type="password" class="form-input" placeholder="Enter current password"
+                                id="currentPassword">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">New Password</label>
+                            <input type="password" class="form-input" placeholder="Enter new password" id="newPassword">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-input" placeholder="Confirm new password"
+                                id="confirmPassword">
+                        </div>
+
+                        <button class="btn btn-primary" id="updatePasswordBtn">Update Password</button>
+
+                        <div class="form-group" style="margin-top: 30px;">
+                            <label class="form-label">Two-Factor Authentication</label>
+                            <div>
+                                <label class="form-label">
+                                    <input type="checkbox" id="twoFactor"> Enable Two-Factor Authentication
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="payment">
+                    <div class="card">
+                        <h3>Payment Methods</h3>
+                        <p>Manage your payment methods and preferences.</p>
+
+                        <div class="form-group">
+                            <label class="form-label">Default Payment Method</label>
+                            <select class="form-input" id="paymentMethodSelect">
+                                <option value="card">Credit/Debit Card</option>
+                                <option value="bank">Bank Transfer</option>
+                                <option value="digital">Digital Wallet</option>
+                            </select>
+                        </div>
+
+                        <!-- Credit/Debit Card Form -->
+                        <div class="payment-method active" id="cardMethod">
+                            <div class="form-group">
+                                <label class="form-label">Card Number</label>
+                                <input type="text" class="form-input" placeholder="1234 5678 9012 3456" id="cardNumber">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Expiration Date</label>
+                                <input type="text" class="form-input" placeholder="MM/YY" id="expiryDate">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">CVV</label>
+                                <input type="text" class="form-input" placeholder="123" id="cvv">
+                            </div>
+                        </div>
+
+                        <!-- Bank Transfer Form -->
+                        <div class="payment-method" id="bankMethod">
+                            <div class="form-group">
+                                <label class="form-label">Bank Name</label>
+                                <input type="text" class="form-input" placeholder="e.g., Maybank" id="bankName">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Account Number</label>
+                                <input type="text" class="form-input" placeholder="1234567890" id="accountNumber">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Account Holder Name</label>
+                                <input type="text" class="form-input" placeholder="Your Name" id="accountHolder">
+                            </div>
+                        </div>
+
+                        <!-- Digital Wallet Form -->
+                        <div class="payment-method" id="digitalMethod">
+                            <div class="form-group">
+                                <label class="form-label">Wallet Provider</label>
+                                <select class="form-input" id="walletProvider">
+                                    <option value="touchngo">Touch 'n Go eWallet</option>
+                                    <option value="grabpay">GrabPay</option>
+                                    <option value="boost">Boost</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-input" placeholder="+60 12 345 6789" id="walletNumber">
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" id="savePaymentBtn">Save Payment Method</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Help & Support Content -->
+            <div id="help" class="content-section">
+                <div class="section-title">
+                    <h2>Help & Support</h2>
+                    <button class="btn btn-primary" id="contactSupportBtn">
+                        <a href="VendorContact.html" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i> Contact Support
+                        </a>
+                    </button>
+                </div>
+
+                <div class="card">
+                    <h3>Frequently Asked Questions</h3>
+
+                    <div class="form-group">
+                        <div class="form-label">How do I update my menu?</div>
+                        <p>Go to the "My Menu" section, click on the item you want to edit, or click "Add New Item" to
+                            create a new menu item.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-label">How do I change my business hours?</div>
+                        <p>Navigate to the "Schedule" section where you can update your operating hours for each day of
+                            the week.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-label">How can I promote my business?</div>
+                        <p>You can create special offers in the "My Menu" section under the "Specials" tab to attract
+                            more customers.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-label">How do I handle customer reviews?</div>
+                        <p>In the "Reviews" section, you can read customer feedback and respond to reviews directly.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Notification Modal -->
+        <div class="modal" id="notificationModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Notifications</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p><strong>Ahmad</strong> left a 5-star review for Chicken Satay</p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p>New order #2847 for Roti Canai (x3) and Teh Tarik (x2)</p>
+                            <span class="activity-time">4 hours ago</span>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p>Special promotion: <strong>10% off</strong> on all orders above RM50 this weekend</p>
+                            <span class="activity-time">Yesterday</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Menu Item Modal -->
+        <div class="modal" id="addItemModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add New Menu Item</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Item Name</label>
+                    <input type="text" class="form-input" placeholder="e.g., Chicken Satay" id="itemName">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Category</label>
+                    <select class="form-input" id="itemCategory">
+                        <option>Main Course</option>
+                        <option>Appetizer</option>
+                        <option>Dessert</option>
+                        <option>Beverage</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Price (RM)</label>
+                    <input type="number" class="form-input" placeholder="e.g., 12.00" step="0.01" id="itemPrice">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-input form-textarea" placeholder="Describe your menu item"
+                        id="itemDescription"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Upload Image</label>
+                    <input type="file" class="form-input" id="itemImage" accept="image/*">
+                </div>
+                <button class="btn btn-primary" style="width: 100%;" id="submitMenuItem">Add Menu Item</button>
+            </div>
+        </div>
+
+        <!-- Edit Menu Item Modal -->
+        <div class="modal" id="editItemModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Edit Menu Item</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Item Name</label>
+                    <input type="text" class="form-input" id="editItemName">
+                </div>
+                <div class="formGroup">
+                    <label class="form-label">Category</label>
+                    <select class="form-input" id="editItemCategory">
+                        <option>Main Course</option>
+                        <option>Appetizer</option>
+                        <option>Dessert</option>
+                        <option>Beverage</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Price (RM)</label>
+                    <input type="number" class="form-input" step="0.01" id="editItemPrice">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-input form-textarea" id="editItemDescription"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select class="form-input" id="editItemStatus">
+                        <option value="Available">Available</option>
+                        <option value="Out of Stock">Out of Stock</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" style="width: 100%;" id="saveEditItem">Save Changes</button>
+            </div>
+        </div>
+
+        <script>
+            // Menu items data
+            const menuItemsData = [
+                { id: 1, name: "Chicken Satay", category: "Main Course", price: 12.00, status: "Available", description: "Grilled chicken skewers with peanut sauce", image: "https://inquiringchef.com/wp-content/uploads/2019/02/Chicken-Satay-4.jpg", rating: 4.8, orders: 128, revenue: 1536 },
+                { id: 2, name: "Nasi Lemak", category: "Main Course", price: 8.50, status: "Available", description: "Coconut rice with sambal, anchovies, peanuts, and boiled egg", image: "https://d3h1lg3ksw6i6b.cloudfront.net/media/image/2024/09/02/be1caaf996bc4d019d43f0beac1d22ce_Nasi_Lemak_Header.jpg", rating: 4.7, orders: 115, revenue: 977.5 },
+                { id: 3, name: "Roti Canai", category: "Breakfast", price: 4.00, status: "Available", description: "Flaky flatbread served with dhal curry", image: "https://www.elmundoeats.com/wp-content/uploads/2017/11/Roti-Canai-3-500x500.jpg", rating: 4.6, orders: 98, revenue: 392 },
+                { id: 4, name: "Cendol", category: "Dessert", price: 5.50, status: "Out of Stock", description: "Iced sweet dessert with green rice flour jelly", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe5LQYoAWLePSIZj89vz4WdQT5Ff04uHDYcA&s", rating: 4.9, orders: 87, revenue: 478.5 },
+                { id: 5, name: "Mee Goreng", category: "Main Course", price: 9.00, status: "Available", description: "Spicy fried noodles with vegetables and prawns", image: "https://resepichenom.com/images/recipes/mee_goreng.jpg", rating: 4.5, orders: 76, revenue: 684 },
+                { id: 6, name: "Teh Tarik", category: "Beverage", price: 3.50, status: "Available", description: "Pulled milk tea with a frothy top", image: "https://edibee.co/cdn/shop/products/RSY-546-Teh-Tarik-1s_530x@2x.jpg?v=1625088021", rating: 4.7, orders: 142, revenue: 497 }
+            ];
+
+            // Reviews data
+            const reviewsData = [
+                { id: 1, reviewer: "Ahmad S.", rating: 5, date: "2 hours ago", comment: "The chicken satay here is amazing! The peanut sauce is perfect and the meat is so tender. Will definitely come back again.", reply: "" },
+                { id: 2, reviewer: "Lisa L.", rating: 4, date: "1 day ago", comment: "Nasi Lemak was good but the sambal could be spicier. Service was fast and friendly though.", reply: "" },
+                { id: 3, reviewer: "Rajesh K.", rating: 5, date: "3 days ago", comment: "Best roti canai in town! Flaky and delicious with perfect dhal. The cendol is also very refreshing.", reply: "" },
+                { id: 4, reviewer: "Sarah M.", rating: 5, date: "5 days ago", comment: "Absolutely love the Mee Goreng here! Perfect blend of spices and just the right amount of heat.", reply: "" },
+                { id: 5, reviewer: "David T.", rating: 3, date: "1 week ago", comment: "Food was good but service was slow. Might try again during less busy hours.", reply: "" }
+            ];
+
+            // Operating hours data
+            const operatingHours = [
+                { day: "Monday", open: "10:00 AM", close: "10:00 PM", status: "Open" },
+                { day: "Tuesday", open: "10:00 AM", close: "10:00 PM", status: "Open" },
+                { day: "Wednesday", open: "10:00 AM", close: "10:00 PM", status: "Open" },
+                { day: "Thursday", open: "10:00 AM", close: "10:00 PM", status: "Open" },
+                { day: "Friday", open: "10:00 AM", close: "11:00 PM", status: "Open" },
+                { day: "Saturday", open: "9:00 AM", close: "11:00 PM", status: "Open" },
+                { day: "Sunday", open: "9:00 AM", close: "10:00 PM", status: "Open" }
+            ];
+
+            // Customer age data
+            const customerAgeData = [
+                { range: "0-3", count: 5 },
+                { range: "4-12", count: 25 },
+                { range: "13-20", count: 45 },
+                { range: "21-30", count: 120 },
+                { range: "31-40", count: 85 },
+                { range: "41-50", count: 45 },
+                { range: "50+", count: 35 }
+            ];
+
+            // Enhanced JavaScript for interactive elements
+            document.addEventListener('DOMContentLoaded', function () {
+                // Initialize data
+                populateMenuItems();
+                populateFoodGrid();
+                populateReviews();
+                populateOperatingHours();
+                populatePopularItems();
+                generateSalesChart();
+                generateCustomerChart();
+
+                // Menu item selection
+                const menuItems = document.querySelectorAll('.menu-item');
+                const contentSections = document.querySelectorAll('.content-section');
+                const pageTitle = document.getElementById('pageTitle');
+
+                menuItems.forEach(item => {
+                    item.addEventListener('click', function () {
+                        const target = this.getAttribute('data-target');
+
+                        // Update active menu item
+                        menuItems.forEach(i => i.classList.remove('active'));
+                        this.classList.add('active');
+
+                        // Show the corresponding content section
+                        contentSections.forEach(section => {
+                            section.classList.remove('active');
+                            if (section.id === target) {
+                                section.classList.add('active');
+                            }
+                        });
+
+                        // Update page title
+                        pageTitle.textContent = this.querySelector('span').textContent;
+                    });
+                });
+
+                // Toggle online status
+                const statusIndicator = document.getElementById('statusIndicator');
+                const statusText = document.getElementById('statusText');
+                const statusToggle = document.getElementById('statusToggle');
+
+                statusToggle.addEventListener('click', function () {
+                    if (statusIndicator.classList.contains('status-offline')) {
+                        statusIndicator.classList.remove('status-offline');
+                        statusText.textContent = 'Online';
+                        showNotification("You're now online. Customers can see your business.");
+                    } else {
+                        statusIndicator.classList.add('status-offline');
+                        statusText.textContent = 'Offline';
+                        showNotification("You're now offline. Customers won't see your business.");
+                    }
+                });
+
+                // Notification system
+                const notificationBell = document.getElementById('notificationBell');
+                const notificationModal = document.getElementById('notificationModal');
+                const modalClose = document.querySelectorAll('.modal-close');
+
+                notificationBell.addEventListener('click', function () {
+                    notificationModal.style.display = 'flex';
+                });
+
+                modalClose.forEach(close => {
+                    close.addEventListener('click', function () {
+                        this.closest('.modal').style.display = 'none';
+                    });
+                });
+
+                function showNotification(message) {
+                    // Create notification element
+                    const notification = document.createElement('div');
+                    notification.style.position = 'fixed';
+                    notification.style.bottom = '20px';
+                    notification.style.right = '20px';
+                    notification.style.backgroundColor = 'var(--primary)';
+                    notification.style.color = 'white';
+                    notification.style.padding = '12px 20px';
+                    notification.style.borderRadius = '8px';
+                    notification.style.boxShadow = 'var(--shadow-lg)';
+                    notification.style.zIndex = '1000';
+                    notification.style.transition = 'opacity 0.5s ease';
+                    notification.textContent = message;
+
+                    document.body.appendChild(notification);
+
+                    // Remove notification after 3 seconds
+                    setTimeout(() => {
+                        notification.style.opacity = '0';
+                        setTimeout(() => {
+                            document.body.removeChild(notification);
+                        }, 500);
+                    }, 3000);
+                }
+
+                // Add menu item button
+                const addMenuItemBtn = document.getElementById('addMenuItemBtn');
+                const addMenuBtn = document.getElementById('addMenuBtn');
+                const addItemModal = document.getElementById('addItemModal');
+                const submitMenuItem = document.getElementById('submitMenuItem');
+
+                [addMenuItemBtn, addMenuBtn].forEach(btn => {
+                    if (btn) {
+                        btn.addEventListener('click', function () {
+                            addItemModal.style.display = 'flex';
+                        });
+                    }
+                });
+
+                submitMenuItem.addEventListener('click', function () {
+                    const itemName = document.getElementById('itemName').value;
+                    if (itemName) {
+                        // Handle image upload
+                        const imageInput = document.getElementById('itemImage');
+                        let imageUrl = "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=450&q=80";
+
+                        // If an image was uploaded, create a preview (in a real app, this would upload to a server)
+                        if (imageInput.files && imageInput.files[0]) {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                imageUrl = e.target.result;
+                                addMenuItemToData(itemName, imageUrl);
+                            }
+                            reader.readAsDataURL(imageInput.files[0]);
+                        } else {
+                            addMenuItemToData(itemName, imageUrl);
+                        }
+                    } else {
+                        showNotification("Please enter a menu item name");
+                    }
+                });
+
+                function addMenuItemToData(itemName, imageUrl) {
+                    // Add new menu item to data
+                    const newItem = {
+                        id: menuItemsData.length + 1,
+                        name: itemName,
+                        category: document.getElementById('itemCategory').value,
+                        price: parseFloat(document.getElementById('itemPrice').value) || 0,
+                        status: "Available",
+                        description: document.getElementById('itemDescription').value,
+                        image: imageUrl,
+                        rating: 4.5,
+                        orders: Math.floor(Math.random() * 50) + 20,
+                        revenue: (parseFloat(document.getElementById('itemPrice').value) || 0) * (Math.floor(Math.random() * 50) + 20)
+                    };
+
+                    menuItemsData.push(newItem);
+
+                    // Update UI
+                    populateMenuItems();
+                    populateFoodGrid();
+                    populatePopularItems();
+
+                    showNotification(`Menu item "${itemName}" added successfully!`);
+                    addItemModal.style.display = 'none';
+
+                    // Reset form
+                    document.getElementById('itemName').value = '';
+                    document.getElementById('itemPrice').value = '';
+                    document.getElementById('itemDescription').value = '';
+                    document.getElementById('itemImage').value = '';
+                }
+
+                // Edit menu item functionality
+                document.addEventListener('click', function (e) {
+                    if (e.target.classList.contains('edit-item-btn')) {
+                        const itemId = parseInt(e.target.getAttribute('data-id'));
+                        const item = menuItemsData.find(i => i.id === itemId);
+
+                        if (item) {
+                            document.getElementById('editItemName').value = item.name;
+                            document.getElementById('editItemCategory').value = item.category;
+                            document.getElementById('editItemPrice').value = item.price;
+                            document.getElementById('editItemDescription').value = item.description;
+                            document.getElementById('editItemStatus').value = item.status;
+
+                            document.getElementById('saveEditItem').setAttribute('data-id', itemId);
+                            document.getElementById('editItemModal').style.display = 'flex';
+                        }
+                    }
+
+                    if (e.target.classList.contains('delete-item-btn')) {
+                        const itemId = parseInt(e.target.getAttribute('data-id'));
+                        const itemIndex = menuItemsData.findIndex(i => i.id === itemId);
+
+                        if (itemIndex !== -1) {
+                            const itemName = menuItemsData[itemIndex].name;
+                            menuItemsData.splice(itemIndex, 1);
+
+                            // Update UI
+                            populateMenuItems();
+                            populateFoodGrid();
+                            populatePopularItems();
+
+                            showNotification(`Menu item "${itemName}" deleted successfully!`);
+                        }
+                    }
+                });
+
+                document.getElementById('saveEditItem').addEventListener('click', function () {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    const itemIndex = menuItemsData.findIndex(i => i.id === itemId);
+
+                    if (itemIndex !== -1) {
+                        menuItemsData[itemIndex].name = document.getElementById('editItemName').value;
+                        menuItemsData[itemIndex].category = document.getElementById('editItemCategory').value;
+                        menuItemsData[itemIndex].price = parseFloat(document.getElementById('editItemPrice').value);
+                        menuItemsData[itemIndex].description = document.getElementById('editItemDescription').value;
+                        menuItemsData[itemIndex].status = document.getElementById('editItemStatus').value;
+
+                        // Update UI
+                        populateMenuItems();
+                        populateFoodGrid();
+                        populatePopularItems();
+
+                        showNotification("Menu item updated successfully!");
+                        document.getElementById('editItemModal').style.display = 'none';
+                    }
+                });
+
+                // Update special offer
+                document.getElementById('updateSpecialBtn').addEventListener('click', function () {
+                    const title = document.getElementById('specialTitle').value;
+                    const description = document.getElementById('specialDescription').value;
+                    const discount = document.getElementById('specialDiscount').value;
+
+                    showNotification(`Special offer "${title}" updated with ${discount}% discount!`);
+                });
+
+                // Search functionality
+                const searchInput = document.getElementById('searchInput');
+                const searchResults = document.getElementById('searchResults');
+
+                searchInput.addEventListener('keyup', function (e) {
+                    const query = this.value.trim().toLowerCase();
+
+                    if (query.length > 2) {
+                        // Search through menu items and reviews
+                        const foundInMenu = menuItemsData.filter(item =>
+                            item.name.toLowerCase().includes(query) ||
+                            item.description.toLowerCase().includes(query) ||
+                            item.category.toLowerCase().includes(query)
+                        );
+
+                        const foundInReviews = reviewsData.filter(review =>
+                            review.comment.toLowerCase().includes(query) ||
+                            review.reviewer.toLowerCase().includes(query)
+                        );
+
+                        if (foundInMenu.length > 0 || foundInReviews.length > 0) {
+                            displaySearchResults(foundInMenu, foundInReviews, query);
+                        } else {
+                            searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
+                            searchResults.style.display = 'block';
+                        }
+                    } else {
+                        searchResults.style.display = 'none';
+                    }
+                });
+
+                function displaySearchResults(menuItems, reviews, query) {
+                    let html = '';
+
+                    if (menuItems.length > 0) {
+                        html += '<div class="search-result-item" style="font-weight: bold; background: #f5f5f5;">Menu Items</div>';
+                        menuItems.forEach(item => {
+                            html += `
+                        <div class="search-result-item" data-type="menu" data-id="${item.id}">
+                            <div><strong>${highlightText(item.name, query)}</strong> - RM${item.price.toFixed(2)}</div>
+                            <div>${highlightText(item.description, query)}</div>
+                        </div>
+                    `;
+                        });
+                    }
+
+                    if (reviews.length > 0) {
+                        html += '<div class="search-result-item" style="font-weight: bold; background: #f5f5f5;">Reviews</div>';
+                        reviews.forEach(review => {
+                            html += `
+                        <div class="search-result-item" data-type="review" data-id="${review.id}">
+                            <div><strong>${highlightText(review.reviewer, query)}</strong> - ${review.rating} stars</div>
+                            <div>${highlightText(review.comment, query)}</div>
+                        </div>
+                    `;
+                        });
+                    }
+
+                    searchResults.innerHTML = html;
+                    searchResults.style.display = 'block';
+
+                    // Add click handlers to search results
+                    document.querySelectorAll('.search-result-item[data-type]').forEach(item => {
+                        item.addEventListener('click', function () {
+                            const type = this.getAttribute('data-type');
+                            const id = parseInt(this.getAttribute('data-id'));
+
+                            if (type === 'menu') {
+                                // Navigate to menu section
+                                document.querySelector('.menu-item[data-target="menu"]').click();
+                                searchResults.style.display = 'none';
+                                searchInput.value = '';
+                            } else if (type === 'review') {
+                                // Navigate to reviews section
+                                document.querySelector('.menu-item[data-target="reviews"]').click();
+                                searchResults.style.display = 'none';
+                                searchInput.value = '';
+                            }
+                        });
+                    });
+                }
+
+                function highlightText(text, query) {
+                    if (!query) return text;
+                    const regex = new RegExp(`(${query})`, 'gi');
+                    return text.replace(regex, '<mark>$1</mark>');
+                }
+
+                // Close search results when clicking outside
+                document.addEventListener('click', function (e) {
+                    if (!searchResults.contains(e.target) && e.target !== searchInput) {
+                        searchResults.style.display = 'none';
+                    }
+                });
+
+                // Tab functionality
+                const tabs = document.querySelectorAll('.tab');
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', function () {
+                        const tabId = this.getAttribute('data-tab');
+                        const tabContainer = this.closest('.tabs');
+
+                        // Update active tab
+                        tabContainer.querySelectorAll('.tab').forEach(t => {
+                            t.classList.remove('active');
+                        });
+                        this.classList.add('active');
+
+                        // Show corresponding tab content
+                        const contentContainer = this.closest('.content-section');
+                        contentContainer.querySelectorAll('.tab-content').forEach(content => {
+                            content.classList.remove('active');
+                            if (content.id === tabId) {
+                                content.classList.add('active');
+                            }
+                        });
+                    });
+                });
+
+                // Payment method selection
+                document.getElementById('paymentMethodSelect').addEventListener('change', function () {
+                    const method = this.value;
+
+                    // Hide all payment methods
+                    document.querySelectorAll('.payment-method').forEach(el => {
+                        el.classList.remove('active');
+                    });
+
+                    // Show selected payment method
+                    document.getElementById(method + 'Method').classList.add('active');
+                });
+
+                // Export report button
+                const exportReportBtn = document.getElementById('exportReportBtn');
+                if (exportReportBtn) {
+                    exportReportBtn.addEventListener('click', function () {
+                        showNotification("Exporting analytics report as PDF...");
+                    });
+                }
+
+                // Location edit button
+                const editLocationBtn = document.getElementById('editLocationBtn');
+                const updateLocationBtn = document.getElementById('updateLocationBtn');
+
+                if (editLocationBtn && updateLocationBtn) {
+                    editLocationBtn.addEventListener('click', function () {
+                        document.getElementById('businessAddress').disabled = false;
+                        document.getElementById('serviceRadius').disabled = false;
+                        updateLocationBtn.style.display = 'block';
+                        editLocationBtn.style.display = 'none';
+                    });
+
+                    updateLocationBtn.addEventListener('click', function () {
+                        const address = document.getElementById('businessAddress').value;
+                        const radius = document.getElementById('serviceRadius').value;
+
+                        showNotification(`Location updated to: ${address} with ${radius} service radius`);
+
+                        document.getElementById('businessAddress').disabled = true;
+                        document.getElementById('serviceRadius').disabled = true;
+                        updateLocationBtn.style.display = 'none';
+                        editLocationBtn.style.display = 'block';
+                    });
+                }
+
+                // Save schedule button
+                document.getElementById('saveScheduleBtn').addEventListener('click', function () {
+                    const hourRows = document.querySelectorAll('.hour-row');
+
+                    hourRows.forEach(row => {
+                        const day = row.querySelector('.day-label').textContent;
+                        const open = row.querySelector('.open-time').value;
+                        const close = row.querySelector('.close-time').value;
+                        const status = row.querySelector('.status-toggle').textContent;
+
+                        // Update operating hours data
+                        const dayIndex = operatingHours.findIndex(h => h.day === day);
+                        if (dayIndex !== -1) {
+                            operatingHours[dayIndex].open = open;
+                            operatingHours[dayIndex].close = close;
+                            operatingHours[dayIndex].status = status;
+                        }
+                    });
+
+                    showNotification("Operating hours updated successfully!");
+                });
+
+                // Review filter and reply buttons
+                const ratingFilter = document.getElementById('ratingFilter');
+                const dateFilter = document.getElementById('dateFilter');
+
+                if (ratingFilter) {
+                    ratingFilter.addEventListener('change', function () {
+                        const ratingValue = this.value;
+                        filterReviews(ratingValue, dateFilter.value);
+                    });
+                }
+
+                if (dateFilter) {
+                    dateFilter.addEventListener('change', function () {
+                        const dateValue = this.value;
+                        filterReviews(ratingFilter.value, dateValue);
+                    });
+                }
+
+                // Reply to review functionality
+                document.addEventListener('click', function (e) {
+                    if (e.target.classList.contains('reply-btn')) {
+                        const reviewCard = e.target.closest('.review-card');
+                        const form = reviewCard.querySelector('.reply-form');
+                        form.style.display = form.style.display === 'block' ? 'none' : 'block';
+                    }
+
+                    if (e.target.classList.contains('submit-reply-btn')) {
+                        const reviewCard = e.target.closest('.review-card');
+                        const reviewId = parseInt(reviewCard.getAttribute('data-id'));
+                        const replyText = reviewCard.querySelector('.reply-input').value;
+
+                        if (replyText) {
+                            const reviewIndex = reviewsData.findIndex(r => r.id === reviewId);
+                            if (reviewIndex !== -1) {
+                                reviewsData[reviewIndex].reply = replyText;
+                                populateReviews();
+                                showNotification("Reply submitted successfully!");
+                            }
+                        } else {
+                            showNotification("Please enter a reply");
+                        }
+                    }
+
+                    // Delete reply functionality
+                    if (e.target.classList.contains('delete-reply')) {
+                        const reviewCard = e.target.closest('.review-card');
+                        const reviewId = parseInt(reviewCard.getAttribute('data-id'));
+                        const reviewIndex = reviewsData.findIndex(r => r.id === reviewId);
+
+                        if (reviewIndex !== -1) {
+                            reviewsData[reviewIndex].reply = "";
+                            populateReviews();
+                            showNotification("Reply deleted successfully!");
+                        }
+                    }
+                });
+
+                // Settings save button
+                const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+                if (saveSettingsBtn) {
+                    saveSettingsBtn.addEventListener('click', function () {
+                        showNotification("Settings saved successfully!");
+                    });
+                }
+
+                // Update password button
+                document.getElementById('updatePasswordBtn').addEventListener('click', function () {
+                    const currentPassword = document.getElementById('currentPassword').value;
+                    const newPassword = document.getElementById('newPassword').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+
+                    if (!currentPassword || !newPassword || !confirmPassword) {
+                        showNotification("Please fill in all password fields");
+                        return;
+                    }
+
+                    if (newPassword !== confirmPassword) {
+                        showNotification("New passwords do not match");
+                        return;
+                    }
+
+                    showNotification("Password updated successfully!");
+
+                    // Clear password fields
+                    document.getElementById('currentPassword').value = '';
+                    document.getElementById('newPassword').value = '';
+                    document.getElementById('confirmPassword').value = '';
+                });
+
+                // Save payment method button
+                document.getElementById('savePaymentBtn').addEventListener('click', function () {
+                    const method = document.getElementById('paymentMethodSelect').value;
+
+                    if (method === 'card') {
+                        const cardNumber = document.getElementById('cardNumber').value;
+                        const expiryDate = document.getElementById('expiryDate').value;
+                        const cvv = document.getElementById('cvv').value;
+
+                        if (!cardNumber || !expiryDate || !cvv) {
+                            showNotification("Please fill in all card details");
+                            return;
+                        }
+                    } else if (method === 'bank') {
+                        const bankName = document.getElementById('bankName').value;
+                        const accountNumber = document.getElementById('accountNumber').value;
+                        const accountHolder = document.getElementById('accountHolder').value;
+
+                        if (!bankName || !accountNumber || !accountHolder) {
+                            showNotification("Please fill in all bank details");
+                            return;
+                        }
+                    } else if (method === 'digital') {
+                        const walletNumber = document.getElementById('walletNumber').value;
+
+                        if (!walletNumber) {
+                            showNotification("Please fill in your wallet number");
+                            return;
+                        }
+                    }
+
+                    showNotification("Payment method saved successfully!");
+                });
+
+                // Contact support button
+                const contactSupportBtn = document.getElementById('contactSupportBtn');
+                const sendSupportMessage = document.getElementById('sendSupportMessage');
+
+                if (contactSupportBtn) {
+                    contactSupportBtn.addEventListener('click', function () {
+                        document.getElementById('supportSubject').focus();
+                    });
+                }
+
+                if (sendSupportMessage) {
+                    sendSupportMessage.addEventListener('click', function () {
+                        const subject = document.getElementById('supportSubject').value;
+                        const message = document.getElementById('supportMessage').value;
+
+                        if (subject && message) {
+                            showNotification("Support message sent successfully!");
+                            document.getElementById('supportSubject').value = '';
+                            document.getElementById('supportMessage').value = '';
+                        } else {
+                            showNotification("Please fill in both subject and message fields");
+                        }
+                    });
+                }
+
+                // Add this to your vendor dashboard script
+                document.getElementById('contactSupportBtn').addEventListener('click', function () {
+                    const subject = document.getElementById('supportSubject').value;
+                    const message = document.getElementById('supportMessage').value;
+
+                    // Encode the values for URL parameters
+                    const encodedSubject = encodeURIComponent(subject);
+                    const encodedMessage = encodeURIComponent(message);
+
+                    // Redirect to contact page with pre-filled data
+                    window.location.href = `contact-us.html?subject=${encodedSubject}&message=${encodedMessage}`;
+                });
+
+                // Populate menu items table
+                function populateMenuItems() {
+                    const menuItemsTable = document.getElementById('menuItemsTable');
+                    if (!menuItemsTable) return;
+
+                    menuItemsTable.innerHTML = '';
+
+                    menuItemsData.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.category}</td>
+                    <td>RM${item.price.toFixed(2)}</td>
+                    <td><span class="${item.status === 'Available' ? 'trend-up' : 'trend-down'}">${item.status}</span></td>
+                    <td>
+                        <button class="btn btn-outline edit-item-btn" data-id="${item.id}">Edit</button>
+                        <button class="btn btn-danger delete-item-btn" data-id="${item.id}">Delete</button>
+                    </td>
+                `;
+                        menuItemsTable.appendChild(row);
+                    });
+                }
+
+                // Populate food grid
+                function populateFoodGrid() {
+                    const foodGrid = document.getElementById('foodGrid');
+                    if (!foodGrid) return;
+
+                    foodGrid.innerHTML = '';
+
+                    menuItemsData.forEach(item => {
+                        const foodItem = document.createElement('div');
+                        foodItem.className = 'food-item';
+                        foodItem.innerHTML = `
+                    ${item.status === 'Available' ? '<span class="food-badge">Popular</span>' : ''}
+                    <div class="food-img">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
+                    <div class="food-details">
+                        <h3 class="food-title">${item.name}</h3>
+                        <p class="food-desc">${item.description}</p>
+                        <div class="food-meta">
+                            <span class="food-price">RM${item.price.toFixed(2)}</span>
+                            <span class="food-rating">
+                                <i class="fas fa-star"></i> ${item.rating}
+                            </span>
+                        </div>
+                    </div>
+                `;
+                        foodGrid.appendChild(foodItem);
+                    });
+                }
+
+                // Populate popular items table
+                function populatePopularItems() {
+                    const popularItemsTable = document.getElementById('popularItemsTable');
+                    if (!popularItemsTable) return;
+
+                    // Sort menu items by number of orders (descending)
+                    const popularItems = [...menuItemsData].sort((a, b) => b.orders - a.orders);
+
+                    const tbody = popularItemsTable.querySelector('tbody');
+                    tbody.innerHTML = '';
+
+                    popularItems.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.orders}</td>
+                    <td>RM${item.revenue.toFixed(2)}</td>
+                    <td>${item.rating}</td>
+                `;
+                        tbody.appendChild(row);
+                    });
+                }
+
+                // Populate reviews
+                function populateReviews() {
+                    const reviewsContainer = document.getElementById('reviewsContainer');
+                    if (!reviewsContainer) return;
+
+                    reviewsContainer.innerHTML = '';
+
+                    reviewsData.forEach(review => {
+                        const reviewCard = document.createElement('div');
+                        reviewCard.className = 'review-card';
+                        reviewCard.setAttribute('data-id', review.id);
+
+                        let stars = '';
+                        for (let i = 1; i <= 5; i++) {
+                            stars += `<i class="fas ${i <= review.rating ? 'fa-star' : 'fa-star-o'}"></i>`;
+                        }
+
+                        reviewCard.innerHTML = `
+                    <div class="review-header">
+                        <div class="reviewer">${review.reviewer}</div>
+                        <div class="review-date">${review.date}</div>
+                    </div>
+                    <div class="review-rating">
+                        ${stars}
+                    </div>
+                    <p>${review.comment}</p>
+                    
+                    ${review.reply ? `
+                    <div class="review-reply">
+                        <button class="delete-reply"><i class="fas fa-times"></i></button>
+                        <strong>Your response:</strong>
+                        <p>${review.reply}</p>
+                    </div>
+                    ` : ''}
+                    
+                    <div class="review-actions">
+                        <button class="btn btn-outline reply-btn">${review.reply ? 'Edit Response' : 'Reply'}</button>
+                    </div>
+                    
+                    <div class="reply-form">
+                        <textarea class="reply-input" placeholder="Type your response here">${review.reply || ''}</textarea>
+                        <button class="btn btn-primary submit-reply-btn">Submit Response</button>
+                    </div>
+                `;
+
+                        reviewsContainer.appendChild(reviewCard);
+                    });
+                }
+
+                // Filter reviews
+                function filterReviews(rating, date) {
+                    let filteredReviews = [...reviewsData];
+
+                    // Filter by rating
+                    if (rating !== 'all') {
+                        filteredReviews = filteredReviews.filter(review => review.rating === parseInt(rating));
+                    }
+
+                    // Sort by date
+                    if (date === 'newest') {
+                        filteredReviews.sort((a, b) => {
+                            // Simple date sorting for demo purposes
+                            if (a.date.includes('hour')) return -1;
+                            if (b.date.includes('hour')) return 1;
+                            if (a.date.includes('day') && b.date.includes('day')) {
+                                return parseInt(a.date) - parseInt(b.date);
+                            }
+                            return 0;
+                        });
+                    } else if (date === 'oldest') {
+                        filteredReviews.sort((a, b) => {
+                            if (a.date.includes('hour')) return 1;
+                            if (b.date.includes('hour')) return -1;
+                            if (a.date.includes('day') && b.date.includes('day')) {
+                                return parseInt(b.date) - parseInt(a.date);
+                            }
+                            return 0;
+                        });
+                    }
+
+                    // Repopulate reviews
+                    const reviewsContainer = document.getElementById('reviewsContainer');
+                    if (!reviewsContainer) return;
+
+                    reviewsContainer.innerHTML = '';
+
+                    filteredReviews.forEach(review => {
+                        const reviewCard = document.createElement('div');
+                        reviewCard.className = 'review-card';
+                        reviewCard.setAttribute('data-id', review.id);
+
+                        let stars = '';
+                        for (let i = 1; i <= 5; i++) {
+                            stars += `<i class="fas ${i <= review.rating ? 'fa-star' : 'fa-star-o'}"></i>`;
+                        }
+
+                        reviewCard.innerHTML = `
+                    <div class="review-header">
+                        <div class="reviewer">${review.reviewer}</div>
+                        <div class
+continue
+text
+                        <div class="review-date">${review.date}</div>
+                    </div>
+                    <div class="review-rating">
+                        ${stars}
+                    </div>
+                    <p>${review.comment}</p>
+                    
+                    ${review.reply ? `
+                    <div class="review-reply">
+                        <button class="delete-reply"><i class="fas fa-times"></i></button>
+                        <strong>Your response:</strong>
+                        <p>${review.reply}</p>
+                    </div>
+                    ` : ''}
+                    
+                    <div class="review-actions">
+                        <button class="btn btn-outline reply-btn">${review.reply ? 'Edit Response' : 'Reply'}</button>
+                    </div>
+                    
+                    <div class="reply-form">
+                        <textarea class="reply-input" placeholder="Type your response here">${review.reply || ''}</textarea>
+                        <button class="btn btn-primary submit-reply-btn">Submit Response</button>
+                    </div>
+                `;
+
+                        reviewsContainer.appendChild(reviewCard);
+                    });
+                }
+
+                // Populate operating hours
+                function populateOperatingHours() {
+                    const hoursEditor = document.getElementById('hoursEditor');
+                    if (!hoursEditor) return;
+
+                    hoursEditor.innerHTML = '';
+
+                    operatingHours.forEach(hour => {
+                        const hourRow = document.createElement('div');
+                        hourRow.className = 'hour-row';
+                        hourRow.innerHTML = `
+                    <div class="day-label">${hour.day}</div>
+                    <div class="time-inputs">
+                        <input type="text" class="time-input open-time" value="${hour.open}">
+                        <span>to</span>
+                        <input type="text" class="time-input close-time" value="${hour.close}">
+                    </div>
+                    <div class="status-toggle ${hour.status === 'Open' ? 'status-open' : 'status-closed'}">${hour.status}</div>
+                `;
+                        hoursEditor.appendChild(hourRow);
+                    });
+
+                    // Add toggle functionality to status buttons
+                    const statusToggles = document.querySelectorAll('.status-toggle');
+                    statusToggles.forEach(toggle => {
+                        toggle.addEventListener('click', function () {
+                            if (this.textContent === 'Open') {
+                                this.textContent = 'Closed';
+                                this.classList.remove('status-open');
+                                this.classList.add('status-closed');
+                            } else {
+                                this.textContent = 'Open';
+                                this.classList.remove('status-closed');
+                                this.classList.add('status-open');
+                            }
+                        });
+                    });
+                }
+
+                // Generate sales chart
+                function generateSalesChart() {
+                    const chartContainer = document.getElementById('salesChart');
+                    if (!chartContainer) return;
+
+                    chartContainer.innerHTML = '';
+
+                    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    const salesData = [12000, 19000, 15000, 21000, 25000, 22000, 28000, 32000, 30000, 35000, 38000, 42000];
+                    const maxSales = Math.max(...salesData);
+
+                    months.forEach((month, index) => {
+                        const barHeight = (salesData[index] / maxSales) * 280;
+                        const bar = document.createElement('div');
+                        bar.className = 'chart-bar';
+                        bar.style.height = `${barHeight}px`;
+                        bar.style.left = `${index * 45 + 20}px`;
+                        bar.title = `RM${salesData[index].toLocaleString()}`;
+
+                        const value = document.createElement('div');
+                        value.className = 'chart-value';
+                        value.textContent = salesData[index] / 1000 + 'k';
+                        value.style.left = `${index * 45 + 20}px`;
+
+                        const label = document.createElement('div');
+                        label.className = 'chart-label';
+                        label.textContent = month;
+                        label.style.left = `${index * 45 + 20}px`;
+
+                        chartContainer.appendChild(bar);
+                        chartContainer.appendChild(value);
+                        chartContainer.appendChild(label);
+                    });
+                }
+
+                // Generate customer chart
+                function generateCustomerChart() {
+                    const chartContainer = document.getElementById('customerChart');
+                    if (!chartContainer) return;
+
+                    chartContainer.innerHTML = '';
+
+                    const maxCount = Math.max(...customerAgeData.map(item => item.count));
+
+                    customerAgeData.forEach((item, index) => {
+                        const barHeight = (item.count / maxCount) * 280;
+                        const bar = document.createElement('div');
+                        bar.className = 'chart-bar';
+                        bar.style.height = `${barHeight}px`;
+                        bar.style.left = `${index * 45 + 20}px`;
+                        bar.title = `${item.count} customers`;
+                        bar.style.backgroundColor = `hsl(${index * 50}, 70%, 50%)`;
+
+                        const value = document.createElement('div');
+                        value.className = 'chart-value';
+                        value.textContent = item.count;
+                        value.style.left = `${index * 45 + 20}px`;
+
+                        const label = document.createElement('div');
+                        label.className = 'chart-label';
+                        label.textContent = item.range;
+                        label.style.left = `${index * 45 + 20}px`;
+
+                        chartContainer.appendChild(bar);
+                        chartContainer.appendChild(value);
+                        chartContainer.appendChild(label);
+                    });
+                }
+
+                // Simulate live data updates
+                function updateLiveData() {
+                    const ordersElement = document.querySelector('#dashboard .card:first-child .card-value');
+                    const earningsElement = document.querySelector('#dashboard .card:nth-child(2) .card-value');
+
+                    if (ordersElement && earningsElement) {
+                        const currentOrders = parseInt(ordersElement.textContent);
+                        const currentEarnings = parseInt(earningsElement.textContent.replace('RM', '').replace(',', ''));
+
+                        // Random but realistic updates
+                        const orderChange = Math.floor(Math.random() * 3);
+                        const earningsChange = Math.floor(Math.random() * 50);
+
+                        ordersElement.textContent = currentOrders + orderChange;
+                        earningsElement.textContent = `RM${(currentEarnings + earningsChange).toLocaleString()}`;
+                    }
+
+                    setTimeout(updateLiveData, 30000); // Update every 30 seconds
+                }
+
+                // Start live updates
+                updateLiveData();
+            });
+        </script>
+
+</body>
+
+</html>

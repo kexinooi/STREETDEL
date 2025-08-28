@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreetDeli Login</title>
+    <link rel="stylesheet" href="css/loginPage.css" />
+    <style>
+      /* Minimal inline styles for demonstration; move to CSS file for production */
+      .error {
+        color: red;
+        font-size: 12px;
+        margin-top: 2px;
+      }
+      #result-message {
+        margin-top: 15px;
+        color: green;
+        font-size: 14px;
+      }
+      .active {
+        font-weight: bold;
+        border-bottom: 2px solid black;
+      }
+      .user-type-selection {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 50px;
+        margin-bottom: 20px;
+      }
+
+      .user-type-btn {
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 8px;
+        background: #f0f0f0;
+        transition: all 0.3s;
+      }
+
+      .user-type-btn.active {
+        background: #2e7d32;
+        color: white;
+      }
+
+      /* Modal Login Window */
+      .login-modal {
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        background: #fff;
+        padding: 25px 20px;
+      }
+
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.2); /* soft gray overlay */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #login-form input {
+        width: 100%;
+        padding: 12px 14px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+      }
+
+      .login-btn {
+        width: 100%;
+        padding: 12px;
+        background: #2e7d32;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .login-btn:hover {
+        background: #1b5e20;
+      }
+
+      .signup-text {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="logo">StreetDeli.</h1>
+      <p class="subtitle">Enter your email to begin</p>
+      <div class="user-type-selection">
+        <button id="userBtn" class="user-type-btn active" data-type="normal">
+          Login as User
+        </button>
+        <button id="vendorBtn" class="user-type-btn" data-type="vendor">
+          Login as Vendor
+        </button>
+      </div>
+
+      <!-- Modal Login Window -->
+      <div class="login-modal">
+        <form id="login-form">
+          <input type="email" id="email" placeholder="Email" required />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <p class="signup-text">
+          Don’t have an account? <a href="signupPage.html">Sign up</a> now
+        </p>
+      </div>
+      <p id="result-message"></p>
+    </div>
+
+    <p id="resultMessage"></p>
+
+    <script>
+      const loginForm = document.getElementById("login-form");
+      const resultMessage = document.getElementById("resultMessage");
+
+      let selectedRole = null;
+
+      const userBtn = document.getElementById("userBtn");
+      const vendorBtn = document.getElementById("vendorBtn");
+
+      function selectRole(role) {
+        selectedRole = role;
+        if (role === "user") {
+          userBtn.classList.add("active");
+          vendorBtn.classList.remove("active");
+        } else {
+          vendorBtn.classList.add("active");
+          userBtn.classList.remove("active");
+        }
+      }
+
+      userBtn.addEventListener("click", () => selectRole("user"));
+      vendorBtn.addEventListener("click", () => selectRole("vendor"));
+
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        if (!selectedRole) {
+          resultMessage.textContent =
+            "Please select User or Vendor login first.";
+          return;
+        }
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        const endpoint =
+          selectedRole === "user"
+            ? "https://streetdelic-fbg0gchtavakeqhg.canadacentral-01.azurewebsites.net/api/login/user"
+            : "https://streetdelic-fbg0gchtavakeqhg.canadacentral-01.azurewebsites.net/api/login/vendor";
+
+        try {
+          const res = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+
+          const data = await res.json();
+
+          if (!res.ok) {
+            resultMessage.textContent = data.message || "Login failed.";
+            return;
+          }
+
+          // Save login info in localStorage
+          localStorage.setItem("token", email); // email as token
+          localStorage.setItem("username", email); // display email
+          localStorage.setItem("role", selectedRole); // user/vendor
+          localStorage.setItem("lastActivity", Date.now());
+
+          console.log(localStorage.getItem("token"));
+          console.log(localStorage.getItem("role"));
+          console.log(localStorage.getItem("username"));
+
+          resultMessage.textContent = "Login successful! Redirecting...";
+
+          setTimeout(() => (window.location.href = "index.html"), 1000);
+        } catch (err) {
+          console.error(err);
+          resultMessage.textContent = "Cannot connect to server.";
+        }
+      });
+    </script>
+  </body>
+</html>

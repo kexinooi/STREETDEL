@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - StreetDeli</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        background-color: white;
+        color: #333;
+      }
+
+      header {
+        position: sticky; /* makes it stick when scrolling */
+        top: 0; /* stick to the top */
+        background-color: black;
+        color: white;
+        margin: 0 auto;
+        padding: 10px 20px;
+        text-align: center;
+        z-index: 1000; /* stay above other elements */
+      }
+
+      main {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      section {
+        background: white;
+        margin-bottom: 30px;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      section h2 {
+        color: darkgreen;
+        margin-bottom: 15px;
+      }
+
+      section p {
+        line-height: 1.6;
+        font-size: 16px;
+      }
+
+      .return-button {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .return-button button {
+        padding: 10px 20px;
+        background-color: darkgreen;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 15px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>About StreetDeli</h1>
+    </header>
+
+    <main>
+      <section id="about-streetdeli">
+        <h2>What is StreetDeli?</h2>
+        <p>
+          StreetDeli is a digital platform designed to help users discover
+          authentic street food experiences in Malaysia. Whether you're a local
+          or tourist, StreetDeli makes it easy to find delicious spots, plan
+          food trips, and connect with local vendors.
+        </p>
+      </section>
+
+      <section id="about-vendor">
+        <h2>About Vendor</h2>
+        <p>
+          StreetDeli empowers street food vendors by giving them visibility
+          online. Vendors can list their stalls, upload photos, update opening
+          times, and connect with new customers — all through a mobile-friendly
+          interface.
+        </p>
+      </section>
+
+      <section id="about-reader">
+        <h2>About User</h2>
+        <p>
+          Users can explore food spots by location, food type, or reviews.
+          StreetDeli helps them navigate the local street food scene with ease
+          and confidence.
+        </p>
+      </section>
+    </main>
+
+    <div class="return-button">
+      <button onclick="history.back()">⬅ Return</button>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script>
+      fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer-placeholder").innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

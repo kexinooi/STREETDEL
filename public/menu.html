@@ -1,0 +1,55 @@
+
+<link rel="stylesheet" href="css/menu.css" />
+<!-- OVERLAY MENU (together with header) -->
+<div id="overlay-menu">
+  <span class="close-btn" onclick="toggleMenu()">×</span>
+  <div class="menu-left">
+    <ul class="menu-links">
+      <!--Need HTML!!-->
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="browse.html">BROWSE</a></li>
+      <li><a href="blogs/blogs.html">BLOGS & ARTICLES</a></li>
+      <li><a href="add-on page/help.html">CONTACT US</a></li>
+      <li><a href="#" id="authLink"></a></li>
+    </ul>
+  </div>
+  <div class="menu-right">
+    <div class="contact-info">
+      <p>Contact</p>
+      <hr />
+      <p>+60 123-456-000</p>
+      <p>info@streetdeli.com</p>
+      <br />
+      <p>1999 StreetDeli Blvd,<br />Malaysia</p>
+    </div>
+
+    <div class="social-icons">
+        <!-- Instagram profile -->
+        <a href="https://www.instagram.com" target="_blank" rel="noopener">
+            <img src="pictures/instagram.png" alt="Instagram" />
+        </a>
+
+        <!-- Twitter profile -->
+        <a href="https://twitter.com" target="_blank" rel="noopener">
+            <img src="pictures/twitter.png" alt="Twitter" />
+        </a>
+
+        <!-- Facebook page -->
+        <a href="https://www.facebook.com" target="_blank" rel="noopener">
+            <img src="pictures/facebook.png" alt="Facebook" />
+        </a>
+
+        <!-- YouTube channel -->
+        <a href="https://www.youtube.com" target="_blank" rel="noopener">
+            <img src="pictures/youtube.png" alt="YouTube" />
+        </a>
+    </div>
+  </div>
+</div>
+<script>
+  const overlayMenu = document.getElementById("overlay-menu");
+
+  function toggleMenu() {
+    overlayMenu.classList.toggle("active");
+  }
+</script>

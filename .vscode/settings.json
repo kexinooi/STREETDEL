@@ -1,0 +1,8 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/c1657e9f-082f-4cd6-96c4-2235baadc0d8/resourceGroups/UCCD2223-sthRg/providers/Microsoft.Web/sites/StreetDeli",
+    "appService.deploySubpath": ".",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ]
+}

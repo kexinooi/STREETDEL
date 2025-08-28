@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nasi Lemak Kampung - StreetDeli</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+
+      :root {
+        --primary: #2e7d32;
+        --primary-dark: #1b5e20;
+        --secondary: #ff9800;
+        --light: #f8f9fa;
+        --dark: #333;
+        --gray: #6c757d;
+        --light-gray: #e9ecef;
+        --white: #ffffff;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --transition: all 0.3s ease;
+      }
+
+      body {
+        background-color: var(--light);
+        color: var(--dark);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .container {
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .icons {
+        display: flex; /* make children align in a row */
+        align-items: center; /* vertically center text and image */
+        cursor: pointer;
+        gap: 10px; /* optional space between email and image */
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .icons span#displayEmail {
+        color: black; /* default */
+      }
+
+      /* ===== HEADER ===== */
+      .header-title-container {
+        max-width: 2000px;
+        margin: 0 auto;
+        padding: 10px 20px;
+        background-color: white;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      /* FLEX CONTAINER FOR TITLE + NAV + PROFILE */
+      .pro-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* TITLE + NAV IMAGE */
+      .title-nav-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .title-nav-container h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #333;
+        margin: 0;
+      }
+
+      .title-nav-container a {
+        text-decoration: none; /* removes underline */
+        color: inherit; /* makes link text same color as normal h1 */
+      }
+
+      .title-nav-container a h1 {
+        margin: 0; /* keep h1 tidy */
+        font-weight: bold; /* make sure logo is bold */
+        color: #222; /* or any color you want */
+      }
+
+      /* NAV ICON */
+      .nav-icon {
+        cursor: pointer;
+        transition: transform 0.2s ease, filter 0.2s ease;
+      }
+
+      .nav-icon:hover {
+        transform: scale(1.1);
+        filter: brightness(0.8);
+      }
+
+      /* USER PROFILE ICON */
+      .profile-icon {
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .profile-icon:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+      }
+
+      #browse-route {
+        font-size: 0.9rem;
+        color: #666;
+        margin: 20px 0px;
+        padding-inline: 5px;
+        max-width: 1300px;
+      }
+      #browse-route a {
+        color: #0077cc;
+        text-decoration: none;
+      }
+      #browse-route a:hover {
+        text-decoration: underline;
+      }
+      #browse-route span {
+        color: #333;
+        font-weight: 500;
+      }
+      #browse-route a,
+      #browse-route span {
+        margin-right: 5px;
+      }
+      #browse-route a + span,
+      #browse-route a + a {
+        margin-left: 5px;
+      }
+
+      /* Main Content */
+      .food-detail {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin: 30px 0;
+      }
+
+      .food-image {
+        flex: 1;
+        min-width: 300px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        position: relative;
+      }
+
+      .food-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+
+      .food-image:hover img {
+        transform: scale(1.03);
+      }
+
+      .image-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: var(--secondary);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .food-info {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      .food-title {
+        font-size: 32px;
+        color: var(--dark);
+        margin-bottom: 15px;
+        line-height: 1.2;
+      }
+
+      .food-meta {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        background: var(--primary);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        margin-right: 15px;
+      }
+
+      .rating i {
+        margin-right: 5px;
+      }
+
+      .food-description {
+        color: var(--gray);
+        margin-bottom: 20px;
+        line-height: 1.8;
+        font-size: 16px;
+      }
+
+      .quote {
+        font-style: italic;
+        color: var(--primary-dark);
+        border-left: 4px solid var(--primary);
+        padding: 15px 20px;
+        margin: 25px 0;
+        background: rgba(46, 125, 50, 0.05);
+        border-radius: 0 8px 8px 0;
+      }
+
+      /* Info Sections */
+      .info-section {
+        margin: 40px 0;
+      }
+
+      .section-title {
+        font-size: 24px;
+        color: var(--dark);
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--light-gray);
+        display: flex;
+        align-items: center;
+      }
+
+      .section-title i {
+        margin-right: 10px;
+        color: var(--primary);
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .info-item {
+        background: var(--white);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+
+      .info-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .info-item h4 {
+        color: var(--primary);
+        margin-bottom: 10px;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+      }
+
+      .info-item h4 i {
+        margin-right: 8px;
+      }
+
+      .info-item p {
+        color: var(--dark);
+        font-size: 16px;
+      }
+
+      /* Tags */
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 25px 0;
+      }
+
+      .tag {
+        background: rgba(46, 125, 50, 0.1);
+        color: var(--primary);
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: var(--transition);
+      }
+
+      .tag:hover {
+        background: var(--primary);
+        color: white;
+        cursor: pointer;
+      }
+
+      /* Comments Section */
+      .comments {
+        margin: 50px 0;
+      }
+
+      .comment {
+        background: var(--white);
+        padding: 25px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+
+      .comment:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .comment-author {
+        font-weight: bold;
+        color: var(--dark);
+        display: flex;
+        align-items: center;
+      }
+
+      .comment-author img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 12px;
+        object-fit: cover;
+      }
+
+      .comment-date {
+        color: var(--gray);
+        font-size: 14px;
+      }
+
+      .comment-content {
+        color: #555;
+        line-height: 1.6;
+        font-size: 16px;
+      }
+
+      .reply-btn {
+        color: var(--primary);
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        transition: var(--transition);
+      }
+
+      .reply-btn i {
+        margin-right: 5px;
+      }
+
+      .reply-btn:hover {
+        color: var(--primary-dark);
+      }
+
+      /* Comment Form */
+      .comment-form {
+        background: var(--white);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        margin-top: 40px;
+      }
+
+      .comment-form h3 {
+        margin-bottom: 25px;
+        color: var(--dark);
+        font-size: 24px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--dark);
+        font-weight: 500;
+        font-size: 16px;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 14px 18px;
+        border: 1px solid var(--light-gray);
+        border-radius: 8px;
+        font-size: 16px;
+        transition: var(--transition);
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+        outline: none;
+      }
+
+      .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .submit-btn {
+        display: block; /* makes it take its own line */
+        margin: 20px auto 0; /* centers horizontally */
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 14px 30px;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: var(--transition);
+        align-items: center;
+      }
+
+      .submit-btn i {
+        margin-left: 8px;
+      }
+
+      .submit-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(46, 125, 50, 0.3);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .header-content {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .food-detail {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .food-title {
+          font-size: 28px;
+        }
+
+        .food-meta {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+
+        .info-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .comment-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+      }
+
+      /* Animation */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animated {
+        animation: fadeIn 0.6s ease forwards;
+      }
+
+      .delay-1 {
+        animation-delay: 0.2s;
+      }
+
+      .delay-2 {
+        animation-delay: 0.4s;
+      }
+
+      .delay-3 {
+        animation-delay: 0.6s;
+      }
+    </style>
+    <link rel="stylesheet" href="global.css">
+  </head>
+
+  <body>
+    <header class="header-title-container">
+      <div class="pro-container">
+        <div class="title-nav-container">
+          <a href="index.html"><h1>StreetDeli.</h1></a>
+          <img
+            src="img/nav2.png"
+            width="25"
+            height="25"
+            alt="Navigation menu"
+            class="nav-icon"
+            onclick="toggleMenu()"
+          />
+        </div>
+        <div class="icons">
+          <span
+            id="displayEmail"
+            style="font-size: 20px; font-weight: bold; margin-right: 10px"
+          ></span>
+          <img
+            id="profileIcon"
+            src="img/profile.png"
+            width="40"
+            height="40"
+            alt="User profile"
+          />
+        </div>
+      </div>
+    </header>
+    <hr />
+
+    <div class="container">
+      <!-- BREADCRUMB -->
+      <nav id="browse-route" aria-label="breadcrumb">
+        <a href="index.html">Home</a><span>/</span>
+        <a href="browse.html">Browse</a>
+        <span>/</span>
+        <span>Nasi Lemak Kampung</span>
+      </nav>
+
+      <div class="food-detail">
+        <div class="food-image animated">
+          <img src="pictures/nasi lemak.jpg" alt="Nasi Lemak Kampung" />
+          <div class="image-badge"><i class="fas fa-star"></i> Featured</div>
+        </div>
+
+        <div class="food-info animated delay-1">
+          <h1 class="food-title">Nasi Lemak Kampung</h1>
+
+          <div class="food-meta">
+            <div class="rating">
+              <i class="fas fa-star"></i> 4.8 (128 reviews)
+            </div>
+            <div><i class="fas fa-map-marker-alt"></i> Kampung Baru, KL</div>
+            <div><i class="fas fa-clock"></i> 5 years established</div>
+          </div>
+
+          <p class="food-description">
+            Authentic Malaysian coconut rice served with traditional
+            accompaniments. Our Nasi Lemak Kampung is prepared with time-honored
+            recipes passed down through generations. The rice is cooked with
+            pandan leaves and coconut milk for a fragrant, creamy texture.
+          </p>
+
+          <p class="food-description">
+            Served with crispy anchovies, roasted peanuts, fresh cucumber
+            slices, and a perfectly boiled egg. Our signature sambal adds a
+            spicy kick that balances the richness of the coconut rice.
+          </p>
+
+          <blockquote class="quote">
+            "The best Nasi Lemak I've had outside of Malaysia! The sambal has
+            the perfect balance of sweet, spicy, and tangy flavors."
+          </blockquote>
+
+          <p class="food-description">
+            Our recipe stays true to traditional methods while using the
+            freshest ingredients. We source local coconuts for milk, fresh
+            pandan leaves from our garden, and prepare the sambal daily to
+            ensure maximum freshness and flavor.
+          </p>
+
+          <div class="tags">
+            <span class="tag">Traditional</span>
+            <span class="tag">Halal</span>
+            <span class="tag">Family Recipe</span>
+            <span class="tag">Spicy</span>
+            <span class="tag">Vegetarian Options</span>
+            <span class="tag">Fresh Ingredients</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section animated delay-1">
+        <h3 class="section-title"><i class="fas fa-clock"></i> Open Time</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <h4><i class="fas fa-sun"></i> Breakfast</h4>
+            <p>7:00 AM - 10:30 AM</p>
+          </div>
+          <div class="info-item">
+            <h4><i class="fas fa-cloud-sun"></i> Lunch</h4>
+            <p>11:30 AM - 2:30 PM</p>
+          </div>
+          <div class="info-item">
+            <h4><i class="fas fa-moon"></i> Dinner</h4>
+            <p>6:00 PM - 10:00 PM</p>
+          </div>
+          <div class="info-item">
+            <h4><i class="fas fa-calendar-alt"></i> Days</h4>
+            <p>Open daily except Monday</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section animated delay-2">
+        <h3 class="section-title">
+          <i class="fas fa-info-circle"></i> Information
+        </h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <h4><i class="fas fa-map-marked-alt"></i> Address</h4>
+            <p>Jalan Raja Alang, Kampung Baru, 50300 Kuala Lumpur</p>
+          </div>
+          <div class="info-item">
+            <h4><i class="fas fa-history"></i> Years Founded</h4>
+            <p>5 years</p>
+          </div>
+          <div class="info-item">
+            <h4><i class="fas fa-star"></i> Rating</h4>
+            <p>4.8/5 based on 128 reviews</p>
+          </div>
+          <div class="info-item">
+            <h4><i class="fas fa-phone"></i> Contact</h4>
+            <p>+60 12-345 6789</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section animated delay-2">
+        <h3 class="section-title">
+          <i class="fas fa-trophy"></i> Achievements
+        </h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <h4><i class="fas fa-award"></i> Michelin 2025</h4>
+            <p>Bib Gourmand recognition</p>
+          </div>
+          <div class="info-item">
+            <h4><i class="fas fa-medal"></i> Time Out 2024</h4>
+            <p>Best Street Food Award</p>
+          </div>
+          <div class="info-item">
+            <h4><i class="fas fa-crown"></i> Foodie Awards 2023</h4>
+            <p>Best Nasi Lemak in KL</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-title">
+        <i class="fas fa-comments"></i> Customer Reviews
+        <span id="comment-count">(0)</span>
+      </h3>
+
+      <div class="comments animated delay-3">
+        <!-- Comments will be inserted here -->
+        <div class="comment-form">
+          <h3><i class="fas fa-pencil-alt"></i> Leave a Review</h3>
+          <form>
+            <div class="form-group">
+              <label for="comment">Your Review</label>
+              <textarea
+                id="comment"
+                name="comment"
+                placeholder="Share your experience..."
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+              Submit Review <i class="fas fa-arrow-right"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("overlay-menu");
+        if (menu.style.display === "block") {
+          menu.style.display = "none";
+        } else {
+          menu.style.display = "block";
+        }
+      }
+
+      // Optional: load menu.html dynamically if using separate file
+      fetch("menu.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.body.insertAdjacentHTML("beforeend", data);
+        });
+
+      fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer-placeholder").innerHTML = data;
+        });
+
+      // Simple animation on scroll
+      document.addEventListener("DOMContentLoaded", function () {
+        const animatedElements = document.querySelectorAll(".animated");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.visibility = "visible";
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        animatedElements.forEach((el) => {
+          el.style.visibility = "hidden";
+          observer.observe(el);
+        });
+
+        // Form submission
+        const form = document.querySelector(".comment-form form");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert(
+              "Thank you for your review! It will be published after moderation."
+            );
+            form.reset();
+          });
+        }
+      });
+    </script>
+
+    <script>
+      const API_BASE =
+        "https://streetdelic-fbg0gchtavakeqhg.canadacentral-01.azurewebsites.net/api";
+
+      // Set this manually per page
+      const currentPage = 3; // change to 2, 3, ... depending on which HTML file
+
+      // Render comments in DOM
+      function renderComments(comments) {
+        const container = document.querySelector(".comments");
+        const formSection = container.querySelector(".comment-form");
+
+        // Remove old comments
+        container.querySelectorAll(".comment").forEach((el) => el.remove());
+
+        // Update comment count
+        document.getElementById(
+          "comment-count"
+        ).textContent = `(${comments.length})`;
+
+        // Insert comments
+        comments.forEach((c) => {
+          const div = document.createElement("div");
+          div.classList.add("comment");
+          div.innerHTML = `
+        <div class="comment-header">
+          <div class="comment-author">
+            <img src="https://randomuser.me/api/portraits/lego/${Math.floor(
+              Math.random() * 10
+            )}.jpg" alt="${c.Author}" />
+            ${c.Author}
+          </div>
+          <div class="comment-date">${new Date(
+            c.Created_At
+          ).toLocaleString()}</div>
+        </div>
+        <div class="comment-content">${c.Content}</div>
+        <button class="reply-btn"><i class="fas fa-reply"></i> Reply</button>
+      `;
+          container.insertBefore(div, formSection);
+        });
+      }
+
+      // Load comments from backend
+      async function loadComments(pageNum) {
+        try {
+          const res = await fetch(`${API_BASE}/comments?pageNum=${pageNum}`);
+
+          if (!res.ok) throw new Error("Failed to fetch comments");
+          const data = await res.json();
+          console.log("Loaded comments:", data);
+          renderComments(data);
+        } catch (err) {
+          console.error("Error loading comments:", err);
+        }
+      }
+
+      function parseJwt(token) {
+        try {
+          const payload = token.split(".")[1];
+          if (!payload) return null;
+          return JSON.parse(atob(payload));
+        } catch (e) {
+          console.error("Invalid JWT:", e);
+          return null;
+        }
+      }
+
+      document
+        .querySelector(".comment-form form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const textarea = document.getElementById("comment");
+          const content = textarea.value.trim();
+          if (!content) return;
+
+          const token = localStorage.getItem("token"); // must be logged in
+          if (!token) {
+            alert("Please log in first to post a review.");
+            return;
+          }
+
+          const userData = parseJwt(token);
+          if (!userData || !userData.email) {
+            alert("Invalid token, please log in again.");
+            localStorage.removeItem("token"); // optional: clear bad token
+            return;
+          }
+
+          try {
+            const res = await fetch(`${API_BASE}/comments`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`, // token from login
+              },
+              body: JSON.stringify({
+                author: userData.email, // include author
+                content,
+                pageNum: currentPage,
+              }),
+            });
+
+            if (!res.ok) {
+              const errData = await res.json();
+              alert(errData.message || "Error submitting review");
+              return;
+            }
+            textarea.value = "";
+            loadComments(currentPage); // refresh comments
+          } catch (err) {
+            console.error("Error submitting review:", err);
+          }
+        });
+
+      // Load comments on page load
+      loadComments(currentPage);
+    </script>
+
+    <script src="auth2.js"></script>
+  </body>
+</html>

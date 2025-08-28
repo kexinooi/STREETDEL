@@ -1,0 +1,267 @@
+/* ===== GENERAL RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* ===== GLOBAL CONTAINER ===== */
+.section-container {
+  margin: 0 auto;
+}
+
+.container {
+  padding: 0 5px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.icons {
+  display: flex;           /* make children align in a row */
+  align-items: center;     /* vertically center text and image */
+  cursor: pointer;
+  gap: 10px;               /* optional space between email and image */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.icons span#displayEmail {
+  color: black; /* default */
+}
+
+body.dark-mode .icons span#displayEmail {
+  color: #e0e0e0; /* light text in dark mode */
+}
+
+/* ===== HEADER ===== */
+.header-title-container {
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* FLEX CONTAINER FOR TITLE + NAV + PROFILE */
+.pro-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* TITLE + NAV IMAGE */
+.title-nav-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.title-nav-container h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.title-nav-container a {
+  text-decoration: none; /* removes underline */
+  color: inherit; /* makes link text same color as normal h1 */
+}
+
+.title-nav-container a h1 {
+  margin: 0; /* keep h1 tidy */
+  font-weight: bold; /* make sure logo is bold */
+  color: #222; /* or any color you want */
+}
+
+/* NAV ICON */
+.nav-icon {
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.nav-icon:hover {
+  transform: scale(1.1);
+  filter: brightness(0.8);
+}
+
+/* USER PROFILE ICON */
+.profile-icon {
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== NAVIGATION ===== */
+#browse-route {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 20px auto;
+  padding-inline: 20px;
+}
+#browse-route a {
+  color: #0077cc;
+  text-decoration: none;
+}
+#browse-route a:hover {
+  text-decoration: underline;
+}
+#browse-route span {
+  color: #333;
+  font-weight: 500;
+}
+#browse-route a,
+#browse-route span {
+  margin-right: 5px;
+}
+#browse-route a + span,
+#browse-route a + a {
+  margin-left: 5px;
+}
+
+/* ===== Form Card Styling ===== */
+.form-card {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 16px;
+  padding: 35px 30px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.form-card h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.form-card .subtitle {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.form-wrapper .form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #222;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="file"],
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  font-size: 1rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group input[type="file"]:focus {
+  border-color: #0077cc;
+  box-shadow: 0 0 5px rgba(0, 119, 204, 0.2);
+  outline: none;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.checkbox-group label {
+  font-size: 0.95rem;
+}
+
+.form-wrapper button {
+  width: 100%;
+  padding: 14px;
+  background: #218838;
+  color: #fff;
+  border: none;
+  border-radius: 10px; /* <-- added border radius */
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #1e7e34;
+  transform: scale(1.03);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.result {
+  margin-top: 20px;
+  padding: 15px;
+  background: #e8f5e9;
+  border-left: 4px solid #4caf50;
+  border-radius: 8px;
+  display: none;
+  text-align: center;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .form-card {
+    padding: 25px 20px;
+  }
+
+  .form-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-card .subtitle {
+    font-size: 0.95rem;
+  }
+
+  button {
+    font-size: 0.95rem;
+  }
+}

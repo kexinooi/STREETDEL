@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>StreetDeli.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/homePage.css" />
+    <link rel="stylesheet" href="global.css">
+  </head>
+
+  <body>
+    <!-- HEADER SECTION -->
+    <section class="header">
+      <div class="top-bar">
+        <div class="logo-menu">
+          <h1 class="logo">StreetDeli.</h1>
+          <div class="menu-icon" onclick="toggleMenu()">
+            <img
+              src="img/nav.jpg"
+              alt="Menu"
+              style="width: 25px; height: 25px"
+            />
+          </div>
+        </div>
+
+        <div class="icons">
+          <span
+            id="displayEmail"
+            style="font-size: 20px; font-weight: bold; margin-right: 10px"
+          ></span>
+          <img
+            id="profileIcon"
+            src="pictures/pro2.png"
+            alt="Profile"
+            style="
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              cursor: pointer;
+            "
+          />
+        </div>
+      </div>
+
+      <div class="header-text">
+        <h2>
+          Want To Taste <br />
+          Street Food Near You?
+        </h2>
+        <a href="browse.html" class="browse-btn">Browse</a>
+      </div>
+    </section>
+
+    <!-- HIDDEN GEM SECTION -->
+    <section id="hidden-gems">
+      <h2>Hidden Gems</h2>
+
+      <div class="gems-container">
+        <!-- Card 1 - Updated to be clickable -->
+        <a
+          href="malaycuisinekampungbary.html"
+          class="gem-card"
+          style="text-decoration: none; color: inherit"
+        >
+          <div class="gem-image-wrapper">
+            <img src="pictures/nasi lemak.jpg" alt="Nasi Lemak Kampung" />
+            <div class="gem-name-overlay">Nasi Lemak Kampung</div>
+          </div>
+          <div class="gem-info">
+            <div class="info-row">
+              <div class="gem-type">Malay Cuisine</div>
+              <div class="fav-icon">❤</div>
+            </div>
+            <div class="gem-location">Kampung Baru, KL</div>
+          </div>
+        </a>
+
+        <!-- Card 2 - Fixed to be properly clickable -->
+        <a
+          href="penangloklokvan.html"
+          class="gem-card"
+          style="text-decoration: none; color: inherit"
+        >
+          <div class="gem-image-wrapper">
+            <img src="pictures/lok-lok.jpg" alt="Penang Lok Lok Van" />
+            <div class="gem-name-overlay">Penang Lok Lok Van</div>
+          </div>
+          <div class="gem-info">
+            <div class="info-row">
+              <div class="gem-type">Skewered Street Food</div>
+              <div class="fav-icon">❤</div>
+            </div>
+            <div class="gem-location">Gurney Drive, Penang</div>
+          </div>
+        </a>
+
+        <!-- Card 3 - Now clickable -->
+        <a
+          href="charkwayteow.html"
+          class="gem-card"
+          style="text-decoration: none; color: inherit"
+        >
+          <div class="gem-image-wrapper">
+            <img src="pictures/char-kway-teow.jpg" alt="Char Kway Teow" />
+            <div class="gem-name-overlay">Char Kway Teow</div>
+          </div>
+          <div class="gem-info">
+            <div class="info-row">
+              <div class="gem-type">Chinese Stir-Fry</div>
+              <div class="fav-icon">❤</div>
+            </div>
+            <div class="gem-location">George Town, Penang</div>
+          </div>
+        </a>
+
+        <!-- Card 4 - Now clickable -->
+        <a
+          href="roticanaistall.html"
+          class="gem-card"
+          style="text-decoration: none; color: inherit"
+        >
+          <div class="gem-image-wrapper">
+            <img src="pictures/roti-canai.jpg" alt="Roti Canai Stall" />
+            <div class="gem-name-overlay">Roti Canai Stall</div>
+          </div>
+          <div class="gem-info">
+            <div class="info-row">
+              <div class="gem-type">Indian Breakfast</div>
+              <div class="fav-icon">❤</div>
+            </div>
+            <div class="gem-location">Brickfields, KL</div>
+          </div>
+        </a>
+
+        <!-- Final card: View more -->
+        <div class="more-card">
+          <!--Updated to link to moreaccess.html-->
+          <a href="moreaccess.html">Click to access more →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG & ARTICLES -->
+    <section class="blog-section">
+      <h2>Blog & Articles</h2>
+      <div class="blog-container">
+        <!-- Blog 1 -->
+        <div class="blog-post">
+          <img src="img/as.jpg" alt="Blog Image" />
+          <div class="blog-content">
+            <h3>Kedah Street Food: Rustic Flavors of the Rice Bowl State</h3>
+            <a href="blogsKedah.html">Continue Reading</a>
+            <!--Need html link,below also-->
+          </div>
+        </div>
+
+        <!-- Blog 2 -->
+        <div class="blog-post">
+          <img src="img/png.jpg" alt="Hidden Gems" />
+          <div class="blog-content">
+            <h3>Penang Street Food: Malaysia’s Flavor Capital</h3>
+            <a href="blogsPng.html">Continue Reading</a>
+          </div>
+        </div>
+
+        <!-- Blog 3 -->
+        <div class="blog-post">
+          <img src="img/kl.jpg" alt="Street Food Diaries" />
+          <div class="blog-content">
+            <h3>Kuala Lumpur Street Food: Big City, Bold Flavors</h3>
+            <a href="blogsKl.html">Continue Reading</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="read-more-btn">
+        <a href="blogs.html">Read More</a>
+        <!--Need HTML!! for #-->
+      </div>
+    </section>
+
+    <!-- PROMO SECTION -->
+    <section class="promo-section">
+      <div class="promo-bg-container">
+        <div class="promo-card">
+          <div class="toggle-tabs">
+            <span id="vendor-tab" class="active">Vendor</span>
+            <span id="reader-tab">Reader</span>
+          </div>
+
+          <h2 id="promo-title">Hi, Vendors!</h2>
+
+          <p id="promo-description">Join us and get promoted today!</p>
+
+          <!--NEED HTML MORE INFORMATION-->
+          <a href="#" id="info-link" class="info-link"
+            >Get more information →</a
+          >
+
+          <div class="subscribe-box">
+            <p id="subscribe-text">Your chance to be seen. Grow with us!</p>
+            <!--NEED HTML FOR #!!!-->
+            <a href="#" id="subscribe-btn" class="subscribe-btn">Subscribe ></a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div id="footer-placeholder"></div>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("overlay-menu");
+        if (menu.style.display === "block") {
+          menu.style.display = "none";
+        } else {
+          menu.style.display = "block";
+        }
+      }
+
+      // Optional: load menu.html dynamically if using separate file
+      fetch("menu.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.body.insertAdjacentHTML("beforeend", data);
+        });
+
+      fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer-placeholder").innerHTML = data;
+        });
+
+      window.addEventListener("DOMContentLoaded", () => {
+        // PROMO SECTION ELEMENTS
+        const vendorTab = document.getElementById("vendor-tab");
+        const readerTab = document.getElementById("reader-tab");
+        const title = document.getElementById("promo-title");
+        const description = document.getElementById("promo-description");
+        const subscribeText = document.getElementById("subscribe-text");
+        const subscribeBtn = document.getElementById("subscribe-btn");
+        const infoLink = document.getElementById("info-link");
+
+        // Default links on page load
+        subscribeBtn.href = "vendor.html";
+        infoLink.href = "subscribe.html";
+
+        // Vendor tab click
+        vendorTab.addEventListener("click", () => {
+          vendorTab.classList.add("active");
+          readerTab.classList.remove("active");
+
+          title.textContent = "Hi, Vendors!";
+          description.textContent = "Join us and get promoted today!";
+          subscribeText.textContent = "Your chance to be seen. Grow with us!";
+
+          subscribeBtn.href = "vendor.html";
+          infoLink.href = "subscribe.html";
+        });
+
+        // Reader tab click
+        readerTab.addEventListener("click", () => {
+          readerTab.classList.add("active");
+          vendorTab.classList.remove("active");
+
+          title.textContent = "Hi, Readers!";
+          description.textContent = "Discover the latest stories and updates!";
+          subscribeText.textContent =
+            "Join our community and never miss a beat!";
+
+          subscribeBtn.href = "reader.html";
+          infoLink.href = "subscribe.html";
+        });
+
+        // OPTIONAL: prevent default "#" click
+        subscribeBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          window.location.href = subscribeBtn.href;
+        });
+
+        infoLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          window.location.href = infoLink.href;
+        });
+      });
+    </script>
+
+    <script type="module">
+      import { initSessionCheck } from "./session.js";
+      initSessionCheck(5 * 60 * 1000); // 5 minutes
+    </script>
+
+    <script src="auth2.js"></script>
+  </body>
+</html>

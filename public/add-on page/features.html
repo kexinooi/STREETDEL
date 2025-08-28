@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Features - StreetDeli</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        background-color: white;
+        color: black;
+      }
+
+      header {
+        position: sticky; /* makes it stick when scrolling */
+        top: 0; /* stick to the top */
+        background-color: black;
+        color: white;
+        margin: 0 auto;
+        padding: 10px 20px;
+        text-align: center;
+        z-index: 1000; /* stay above other elements */
+      }
+
+      main {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      section {
+        background: white;
+        margin-bottom: 30px;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      section h2 {
+        color: darkgreen;
+        margin-bottom: 15px;
+      }
+
+      section p {
+        line-height: 1.6;
+        font-size: 16px;
+      }
+
+      .return-button {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .return-button button {
+        padding: 10px 20px;
+        background-color: darkgreen;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 15px;
+        cursor: pointer;
+      }
+
+      @media (max-width: 600px) {
+        section {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Features of StreetDeli</h1>
+    </header>
+
+    <main>
+      <section id="feature-food">
+        <h2>All Food</h2>
+        <p>
+          StreetDeli provides a wide catalog of street food options. Users can
+          browse by category, region, popularity, or new uploads. Whether you're
+          looking for noodles, skewers, desserts, or drinks — it's all here at
+          your fingertips.
+        </p>
+      </section>
+
+      <section id="feature-blog">
+        <h2>Blog & Article</h2>
+        <p>
+          Our blog brings stories behind the food: from vendor interviews and
+          local food festivals to cultural food histories. Stay updated with our
+          latest features, guides, and tips on street food adventures across
+          Malaysia.
+        </p>
+      </section>
+    </main>
+
+    <div class="return-button">
+      <button onclick="history.back()">⬅ Return</button>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script>
+      fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer-placeholder").innerHTML = data;
+        });
+    </script>
+  </body>
+</html>
