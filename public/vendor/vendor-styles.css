@@ -988,3 +988,72 @@ body {
         font-size: 24px;
     }
 }
+
+/* Cookie consent banner */
+.cookie-consent {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.cookie-consent p {
+    margin: 0;
+    flex: 1;
+    padding-right: 20px;
+}
+
+.cookie-consent-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Social media sharing buttons */
+.social-share {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.social-share-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+}
+
+.facebook-btn {
+    background-color: #3b5998;
+}
+
+.twitter-btn {
+    background-color: #1da1f2;
+}
+
+/* Loading spinner for API calls */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, .3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

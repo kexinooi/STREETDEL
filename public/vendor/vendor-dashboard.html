@@ -6,8 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StreetDeli - Vendor Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="vendor-styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Facebook SDK for social media integration -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0&appId=YOUR_APP_ID" nonce="YOUR_NONCE">
+        </script>
 </head>
 
 <body>
@@ -201,6 +209,27 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- Add social sharing to dashboard -->
+                <div class="card">
+                    <h3>Share Your Business</h3>
+                    <p>Promote your business on social media to attract more customers.</p>
+                    <div class="social-share">
+                        <a href="#" class="social-share-btn facebook-btn" id="shareFacebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-share-btn twitter-btn" id="shareTwitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-share-btn instagram-btn" id="shareInstagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <!-- Facebook share button container -->
+                    <div class="fb-share-button" data-href="https://www.your-streetdeli-website.com/vendor/SeleraStreet"
+                        data-layout="button" data-size="large" style="margin-top: 10px;">
+                    </div>
+                </div>
             </div>
 
             <!-- Menu Content -->
@@ -261,11 +290,6 @@
             <div id="analytics" class="content-section">
                 <div class="section-title">
                     <h2>Business Analytics</h2>
-                    <div>
-                        <button class="btn btn-outline" id="exportReportBtn">
-                            <i class="fas fa-download"></i> Export Report
-                        </button>
-                    </div>
                 </div>
 
                 <div class="dashboard-cards">
@@ -747,7 +771,16 @@
                         <p>In the "Reviews" section, you can read customer feedback and respond to reviews directly.</p>
                     </div>
                 </div>
+            </div>
 
+            <!-- Cookie Consent Banner -->
+            <div class="cookie-consent" id="cookieConsent" style="display: none;">
+                <p>We use cookies to enhance your experience, analyze site traffic, and for marketing purposes. By
+                    continuing to browse, you agree to our use of cookies.</p>
+                <div class="cookie-consent-buttons">
+                    <button class="btn btn-outline" id="cookieReject">Reject Non-Essential</button>
+                    <button class="btn btn-primary" id="cookieAccept">Accept All</button>
+                </div>
             </div>
         </div>
 
@@ -1826,6 +1859,342 @@ text
                 // Start live updates
                 updateLiveData();
             });
+
+            // Enhanced JavaScript with cookies, local storage, session storage, API calls, and social media
+
+            // Cookie functions
+            function setCookie(name, value, days) {
+                let expires = "";
+                if (days) {
+                    const date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/; Secure; SameSite=Lax";
+            }
+
+            function getCookie(name) {
+                const nameEQ = name + "=";
+                const ca = document.cookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            }
+
+            function eraseCookie(name) {
+                document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+            }
+
+            // Cookie consent management
+            function checkCookieConsent() {
+                const consent = getCookie('cookie_consent');
+                if (!consent) {
+                    document.getElementById('cookieConsent').style.display = 'flex';
+                }
+
+                // Set default preferences if not set
+                if (!localStorage.getItem('cookiePreferences')) {
+                    localStorage.setItem('cookiePreferences', JSON.stringify({
+                        necessary: true,
+                        analytics: consent === 'all',
+                        marketing: consent === 'all'
+                    }));
+                }
+            }
+
+            // Initialize cookie consent
+            document.addEventListener('DOMContentLoaded', function () {
+                // Check cookie consent
+                checkCookieConsent();
+
+                // Handle cookie acceptance
+                document.getElementById('cookieAccept').addEventListener('click', function () {
+                    setCookie('cookie_consent', 'all', 365);
+                    // Update preferences
+                    localStorage.setItem('cookiePreferences', JSON.stringify({
+                        necessary: true,
+                        analytics: true,
+                        marketing: true
+                    }));
+                    document.getElementById('cookieConsent').style.display = 'none';
+                    // Enable analytics and marketing features
+                    initializeAnalytics();
+                    initializeMarketing();
+                });
+
+                // Handle cookie rejection
+                document.getElementById('cookieReject').addEventListener('click', function () {
+                    setCookie('cookie_consent', 'necessary', 365);
+                    // Update preferences
+                    localStorage.setItem('cookiePreferences', JSON.stringify({
+                        necessary: true,
+                        analytics: false,
+                        marketing: false
+                    }));
+                    document.getElementById('cookieConsent').style.display = 'none';
+                    // Disable analytics and marketing features
+                    disableAnalytics();
+                    disableMarketing();
+                });
+
+                // Load user preferences from localStorage
+                loadUserPreferences();
+
+                // Initialize social media sharing
+                initializeSocialSharing();
+
+                // Load initial data from API
+                loadInitialData();
+            });
+
+            // Load user preferences from localStorage
+            function loadUserPreferences() {
+                const preferences = JSON.parse(localStorage.getItem('userPreferences') || '{}');
+
+                // Apply theme if saved
+                if (preferences.theme) {
+                    document.documentElement.setAttribute('data-theme', preferences.theme);
+                }
+
+                // Apply other UI preferences
+                if (preferences.collapsedSidebar) {
+                    document.querySelector('.sidebar').classList.add('collapsed');
+                }
+            }
+
+            // Save user preferences to localStorage
+            function saveUserPreferences(key, value) {
+                const preferences = JSON.parse(localStorage.getItem('userPreferences') || '{}');
+                preferences[key] = value;
+                localStorage.setItem('userPreferences', JSON.stringify(preferences));
+            }
+
+            // Use sessionStorage for temporary data
+            function setSessionData(key, value) {
+                sessionStorage.setItem(key, JSON.stringify(value));
+            }
+
+            function getSessionData(key) {
+                return JSON.parse(sessionStorage.getItem(key));
+            }
+
+            // API call functions using jQuery
+            function callAPI(url, method, data, buttonElement, successCallback, errorCallback) {
+                // Show loading state only on the specific button
+                if (buttonElement) {
+                    const originalText = $(buttonElement).html();
+                    $(buttonElement).html('<div class="loading-spinner"></div> Loading...');
+                    $(buttonElement).prop('disabled', true);
+
+                    // Store original content to restore later
+                    $(buttonElement).data('original-content', originalText);
+                }
+
+                // Simulate API call with timeout
+                setTimeout(function () {
+                    // In a real application, this would be a jQuery.ajax call
+                    console.log(`API called: ${method} ${url}`);
+
+                    // Simulate successful response
+                    const response = { status: 'success', data: [] };
+
+                    // Restore button state if a button was passed
+                    if (buttonElement) {
+                        $(buttonElement).html($(buttonElement).data('original-content'));
+                        $(buttonElement).prop('disabled', false);
+                    }
+
+                    if (successCallback) successCallback(response);
+                }, 1500);
+            }
+
+            // Load initial data from API
+            function loadInitialData() {
+                // Check if we have cached data
+                const cachedData = localStorage.getItem('cachedMenuData');
+                const cacheTimestamp = localStorage.getItem('cachedMenuTimestamp');
+                const now = new Date().getTime();
+
+                // Use cached data if it's less than 1 hour old
+                if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp)) < 3600000) {
+                    const menuData = JSON.parse(cachedData);
+                    updateMenuUI(menuData);
+                } else {
+                    // Fetch fresh data from API
+                    callAPI(
+                        'https://api.streetdeli.com/vendor/menu',
+                        'GET',
+                        null,
+                        function (response) {
+                            // Update UI with new data
+                            updateMenuUI(response.data);
+
+                            // Cache the data
+                            localStorage.setItem('cachedMenuData', JSON.stringify(response.data));
+                            localStorage.setItem('cachedMenuTimestamp', now.toString());
+                        },
+                        function (error) {
+                            // Fallback to default data if API fails
+                            console.warn('Using default data due to API error');
+                            populateMenuItems();
+                            populateFoodGrid();
+                        }
+                    );
+                }
+
+                // Load analytics data
+                loadAnalyticsData();
+            }
+
+            // Update menu UI with API data
+            function updateMenuUI(menuData) {
+                // Update your menu items data
+                window.menuItemsData = menuData;
+
+                // Update the UI
+                populateMenuItems();
+                populateFoodGrid();
+                populatePopularItems();
+            }
+
+            // Load analytics data
+            function loadAnalyticsData() {
+                // Check cookie preferences before loading analytics
+                const preferences = JSON.parse(localStorage.getItem('cookiePreferences') || '{}');
+                if (!preferences.analytics) return;
+
+                callAPI(
+                    'https://api.streetdeli.com/vendor/analytics',
+                    'GET',
+                    null,
+                    function (response) {
+                        // Update analytics charts and data
+                        updateAnalyticsUI(response.data);
+                    },
+                    function (error) {
+                        console.error('Failed to load analytics data:', error);
+                    }
+                );
+            }
+
+            // Initialize social media sharing
+            function initializeSocialSharing() {
+                // Facebook share
+                document.getElementById('shareFacebook').addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const url = encodeURIComponent('https://www.your-streetdeli-website.com/vendor/SeleraStreet');
+                    const title = encodeURIComponent('Check out Selera Street on StreetDeli!');
+                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title}`, 'fb-share-dialog', 'width=626,height=436');
+                });
+
+                // Twitter share
+                document.getElementById('shareTwitter').addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const text = encodeURIComponent('Check out Selera Street on StreetDeli! The best Malaysian street food in town!');
+                    const url = encodeURIComponent('https://www.your-streetdeli-website.com/vendor/SeleraStreet');
+                    const hashtags = encodeURIComponent('StreetFood,MalaysianFood,StreetDeli');
+                    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}&hashtags=${hashtags}`, 'twitter-share', 'width=626,height=436');
+                });
+            }
+
+            // Initialize analytics based on cookie preferences
+            function initializeAnalytics() {
+                // Only initialize if analytics cookies are accepted
+                const preferences = JSON.parse(localStorage.getItem('cookiePreferences') || '{}');
+                if (preferences.analytics) {
+                    // Initialize your analytics SDK here (e.g., Google Analytics)
+                    console.log('Analytics initialized');
+
+                    // Load analytics data
+                    loadAnalyticsData();
+                }
+            }
+
+            // Initialize marketing features based on cookie preferences
+            function initializeMarketing() {
+                // Only initialize if marketing cookies are accepted
+                const preferences = JSON.parse(localStorage.getItem('cookiePreferences') || '{}');
+                if (preferences.marketing) {
+                    // Initialize marketing tools here
+                    console.log('Marketing features initialized');
+                }
+            }
+
+            // Disable analytics
+            function disableAnalytics() {
+                // Disable analytics tracking
+                console.log('Analytics disabled');
+            }
+
+            // Disable marketing
+            function disableMarketing() {
+                // Disable marketing features
+                console.log('Marketing features disabled');
+            }
+
+            // Enhanced menu item submission with API call
+            function addMenuItemToData(itemName, imageUrl) {
+                const newItem = {
+                    name: itemName,
+                    category: document.getElementById('itemCategory').value,
+                    price: parseFloat(document.getElementById('itemPrice').value) || 0,
+                    status: "Available",
+                    description: document.getElementById('itemDescription').value,
+                    image: imageUrl
+                };
+
+                // Save to API
+                callAPI(
+                    'https://api.streetdeli.com/vendor/menu',
+                    'POST',
+                    newItem,
+                    function (response) {
+                        // Add the new item with the ID from the server
+                        newItem.id = response.id;
+                        newItem.rating = 4.5;
+                        newItem.orders = Math.floor(Math.random() * 50) + 20;
+                        newItem.revenue = newItem.price * newItem.orders;
+
+                        menuItemsData.push(newItem);
+
+                        // Update UI
+                        populateMenuItems();
+                        populateFoodGrid();
+                        populatePopularItems();
+
+                        showNotification(`Menu item "${itemName}" added successfully!`);
+                        addItemModal.style.display = 'none';
+
+                        // Reset form
+                        document.getElementById('itemName').value = '';
+                        document.getElementById('itemPrice').value = '';
+                        document.getElementById('itemDescription').value = '';
+                        document.getElementById('itemImage').value = '';
+
+                        // Update cache
+                        localStorage.setItem('cachedMenuData', JSON.stringify(menuItemsData));
+                        localStorage.setItem('cachedMenuTimestamp', new Date().getTime().toString());
+                    },
+                    function (error) {
+                        showNotification('Failed to add menu item. Please try again.', 'error');
+                    }
+                );
+            }
+
+            // Enhanced notification system with session storage
+            function showNotification(message, type = 'success') {
+                // Store notification in session storage for persistence
+                const notifications = getSessionData('notifications') || [];
+                notifications.push({
+                    message,
+                    type,
+                    timestamp: new Date().toISOString()
+                });
+                setSessionData('notifications', notifications);
+            }
         </script>
 
 </body>
